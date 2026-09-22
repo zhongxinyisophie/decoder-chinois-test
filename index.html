@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Décoder le chinois · Leçon 1 · Version test</title>
+<meta name="description" content="Prototype de Décoder le chinois pour apprenants francophones.">
+<meta name="theme-color" content="#111827">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<style>
+:root{
+  --bg:#f6f7f8;--card:#ffffff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;
+  --accent:#111827;--soft:#eef2ff;--success:#ecfdf5;--successText:#166534;--warn:#fff7ed;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif}
+.shell{max-width:860px;margin:0 auto;padding:16px}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:16px}
+.brand{font-weight:750;font-size:18px}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--border);background:#fff;color:var(--text);border-radius:12px;padding:11px 14px;min-height:44px}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.soft{background:var(--soft)}
+.btn.link{border:none;background:transparent;padding:4px 0;min-height:0;text-decoration:underline;text-underline-offset:3px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+a.btn{text-decoration:none;display:inline-flex;align-items:center;justify-content:center}
+.card{background:var(--card);border:1px solid var(--border);border-radius:16px;padding:18px}
+.hero{padding:22px}
+.title{font-size:26px;line-height:1.15;font-weight:780}
+.h2{font-size:19px;font-weight:720}
+.small{font-size:13px;color:var(--muted)}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
+.stack{display:grid;gap:14px}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.between{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.progress{height:8px;background:#e5e7eb;border-radius:99px;overflow:hidden}
+.progress>div{height:100%;background:var(--accent);transition:.2s}
+.bigcn{font-size:34px;font-weight:760;letter-spacing:.02em}
+.choice,.chip,.tag{border:1px solid var(--border);background:#fff;border-radius:12px;padding:12px}
+.choice:hover,.chip:hover,.tag:hover{background:#fafafa}
+.feedback{min-height:24px;font-size:14px}
+.notice{background:#f9fafb;border:1px solid var(--border);border-radius:12px;padding:12px}
+.success{background:var(--success);color:var(--successText);border:1px solid #bbf7d0;border-radius:12px;padding:12px}
+.sectionTitle{display:flex;gap:8px;align-items:baseline}
+.kpi{font-size:28px;font-weight:780}
+.pill{display:inline-block;border-radius:999px;background:#f3f4f6;padding:4px 8px;font-size:12px}
+textarea{width:100%;border:1px solid var(--border);border-radius:12px;padding:12px;min-height:80px;font:inherit;background:#fff}
+hr{border:none;border-top:1px solid var(--border)}
+@media(max-width:680px){
+  .grid2,.grid3{grid-template-columns:1fr}
+  .title{font-size:23px}
+  .shell{padding:12px}
+}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="topbar">
+    <div>
+      <div class="brand">Décoder le chinois</div>
+      <div class="small">Leçon 1 · 我的一天 · Ma journée</div>
+    </div>
+    <div class="row">
+      <a class="btn" href="feedback.html">Donner mon avis</a>
+      <button id="resetBtn" class="btn">Réinitialiser</button>
+    </div>
+  </div>
+
+  <section id="home" class="stack">
+    <div class="notice">
+      <b>Version test</b><br>
+      <span class="small">Teste la leçon naturellement, comme si tu apprenais seul(e). À la fin, tu pourras donner ton avis en 2 minutes. Aucun compte n’est nécessaire.</span>
+    </div>
+    <div class="card hero stack">
+      <div class="small">Aujourd’hui</div>
+      <div class="title">6 minutes de chinois</div>
+      <div class="muted">Je te propose uniquement ce qu’il vaut la peine de revoir aujourd’hui.</div>
+      <button id="startToday" class="btn primary">Commencer</button>
+    </div>
+
+    <div class="grid3">
+      <div class="card">
+        <div class="small">Caractères reconnus sans pinyin</div>
+        <div id="statHanzi" class="kpi">0</div>
+      </div>
+      <div class="card">
+        <div class="small">Réponses orales cette semaine</div>
+        <div id="statSpoken" class="kpi">0</div>
+      </div>
+      <div class="card">
+        <div class="small">Pinyin affiché aujourd’hui</div>
+        <div id="statPinyin" class="kpi">0</div>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="between">
+        <div>
+          <div class="h2">Leçon 1 · 我的一天</div>
+          <div class="small">Préparer, revoir ou explorer toute la leçon</div>
+        </div>
+        <span class="pill">A1</span>
+      </div>
+      <div class="grid3">
+        <button class="btn lessonMode" data-mode="preview">Préparer le cours</button>
+        <button class="btn soft lessonMode" data-mode="daily">Révision du jour</button>
+        <button class="btn lessonMode" data-mode="library">Voir tout le contenu</button>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="h2">Ce que tu vas vraiment savoir faire</div>
+      <div class="grid2">
+        <div class="notice">👂 Comprendre des mots et phrases très simples sur une journée</div>
+        <div class="notice">🀄 Reconnaître les caractères clés sans dépendre du pinyin</div>
+        <div class="notice">🗣 Répondre rapidement à des questions simples</div>
+        <div class="notice">🎙 Décrire ta propre journée en quelques phrases</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="session" class="hidden stack">
+    <div class="between">
+      <button id="backHome" class="btn">← Accueil</button>
+      <div style="text-align:right">
+        <div id="sessionLabel" class="h2"></div>
+        <div id="sessionCount" class="small"></div>
+      </div>
+    </div>
+    <div class="progress"><div id="progressBar"></div></div>
+    <div id="taskHost"></div>
+  </section>
+
+  <section id="library" class="hidden stack">
+    <div class="between">
+      <button id="libraryBack" class="btn">← Accueil</button>
+      <div>
+        <div class="h2">Tout le contenu · Leçon 1</div>
+        <div class="small">La leçon est riche, mais tu n’as jamais besoin de tout faire d’un coup.</div>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="sectionTitle"><div class="h2">🟢 À utiliser</div><div class="small">8 mots / expressions actifs</div></div>
+      <div class="row" id="activeWords"></div>
+    </div>
+
+    <div class="card stack">
+      <div class="sectionTitle"><div class="h2">🔵 À reconnaître</div><div class="small">sans obligation de les produire</div></div>
+      <div class="row" id="recognitionWords"></div>
+    </div>
+
+    <div class="card stack">
+      <div class="h2">Phrases-clés</div>
+      <div id="sentenceList" class="stack"></div>
+    </div>
+
+    <div class="card stack">
+      <div class="h2">Réseaux de caractères</div>
+      <div class="grid3">
+        <div class="notice"><b>上 / 下</b><br>上班 · 下班 · 上午 · 下午</div>
+        <div class="notice"><b>看</b><br>看书 · 看电影 · 看电视</div>
+        <div class="notice"><b>饭</b><br>做饭 · 吃饭 · 早饭 · 晚饭</div>
+      </div>
+    </div>
+
+    <div class="card stack">
+      <div class="h2">Réflexes francophones</div>
+      <div class="grid3">
+        <div class="notice"><b>Temps</b><br>我七点起床。<br><span class="small">Le temps vient souvent avant l’action.</span></div>
+        <div class="notice"><b>左右</b><br>七点左右<br><span class="small">≈ vers 7 heures</span></div>
+        <div class="notice"><b>Verbes</b><br>我上班 / 你上班 / 他上班<br><span class="small">Pas de conjugaison.</span></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+const DATA = {
+  active:[
+    {hz:'起床',py:'qǐchuáng',fr:'se lever'},
+    {hz:'上班',py:'shàngbān',fr:'aller / être au travail'},
+    {hz:'下班',py:'xiàbān',fr:'finir le travail'},
+    {hz:'回家',py:'huí jiā',fr:'rentrer à la maison'},
+    {hz:'做饭',py:'zuòfàn',fr:'faire à manger'},
+    {hz:'看书',py:'kàn shū',fr:'lire'},
+    {hz:'睡觉',py:'shuìjiào',fr:'dormir / aller dormir'},
+    {hz:'左右',py:'zuǒyòu',fr:'environ / vers'}
+  ],
+  recognition:[
+    {hz:'吃饭',fr:'manger'},{hz:'早饭',fr:'petit-déjeuner'},{hz:'晚饭',fr:'dîner'},
+    {hz:'上午',fr:'matin'},{hz:'下午',fr:'après-midi'},{hz:'看电影',fr:'regarder un film'},
+    {hz:'看电视',fr:'regarder la télévision'},{hz:'在家',fr:'être à la maison'}
+  ],
+  sentences:[
+    '我七点左右起床。',
+    '我八点半上班。',
+    '我下午六点下班。',
+    '下班以后，我回家。',
+    '回家以后，我做饭。',
+    '我先做饭，再看书。',
+    '我一般十一点左右睡觉。'
+  ]
+};
+
+const state={
+  pinyin:0,spoken:0,hanzi:0,mode:'daily',tasks:[],index:0,
+  wordMastery:{},todaySeen:new Set()
+};
+
+const $=id=>document.getElementById(id);
+function speak(text,rate=.82){
+  if(!('speechSynthesis' in window)){alert("La lecture audio n’est pas disponible dans ce navigateur.");return}
+  speechSynthesis.cancel();
+  const u=new SpeechSynthesisUtterance(text);u.lang='zh-CN';u.rate=rate;speechSynthesis.speak(u);
+}
+function updateStats(){
+  $('statPinyin').textContent=state.pinyin;
+  $('statSpoken').textContent=state.spoken;
+  $('statHanzi').textContent=state.hanzi;
+}
+function showHome(){
+  $('home').classList.remove('hidden');$('session').classList.add('hidden');$('library').classList.add('hidden');updateStats();
+}
+function showLibrary(){
+  $('home').classList.add('hidden');$('session').classList.add('hidden');$('library').classList.remove('hidden');
+  $('activeWords').innerHTML=DATA.active.map(w=>`<span class="chip"><b>${w.hz}</b> <span class="small">${w.fr}</span></span>`).join('');
+  $('recognitionWords').innerHTML=DATA.recognition.map(w=>`<span class="chip"><b>${w.hz}</b> <span class="small">${w.fr}</span></span>`).join('');
+  $('sentenceList').innerHTML=DATA.sentences.map(s=>`<div class="notice between"><span>${s}</span><button class="btn playSentence" data-text="${s}">▶ Écouter</button></div>`).join('');
+  document.querySelectorAll('.playSentence').forEach(b=>b.onclick=()=>speak(b.dataset.text));
+}
+function makeDailyTasks(){
+  return [
+    {type:'listenWord',word:'起床'},
+    {type:'hanziMeaning',word:'下班'},
+    {type:'hanziMeaning',word:'回家'},
+    {type:'segment',sentence:'我七点左右起床。',chunks:['我','七点左右','起床']},
+    {type:'reflex',kind:'time'},
+    {type:'quick',q:'你几点起床？',support:'我 ____ 点左右起床。'},
+    {type:'quick',q:'下班以后，你做什么？',support:'我下班以后 ______。'},
+    {type:'finalSpeak'}
+  ];
+}
+function makePreviewTasks(){
+  return [
+    {type:'listenWord',word:'起床'},
+    {type:'listenWord',word:'上班'},
+    {type:'network',kind:'updown'},
+    {type:'reflex',kind:'time'}
+  ];
+}
+function startSession(mode){
+  state.mode=mode;
+  state.tasks=mode==='preview'?makePreviewTasks():makeDailyTasks();
+  state.index=0;
+  $('home').classList.add('hidden');$('library').classList.add('hidden');$('session').classList.remove('hidden');
+  $('sessionLabel').textContent=mode==='preview'?'Préparation · Leçon 1':'Révision du jour · Leçon 1';
+  renderTask();
+}
+function nextTask(){
+  state.index++;
+  if(state.index>=state.tasks.length){renderDone();return}
+  renderTask();
+}
+function renderTask(){
+  const t=state.tasks[state.index];
+  $('sessionCount').textContent=`${state.index+1} / ${state.tasks.length}`;
+  $('progressBar').style.width=`${((state.index+1)/state.tasks.length)*100}%`;
+  if(t.type==='listenWord') renderListenWord(t);
+  if(t.type==='hanziMeaning') renderHanziMeaning(t);
+  if(t.type==='segment') renderSegment(t);
+  if(t.type==='network') renderNetwork(t);
+  if(t.type==='reflex') renderReflex(t);
+  if(t.type==='quick') renderQuick(t);
+  if(t.type==='finalSpeak') renderFinalSpeak(t);
+}
+function findWord(hz){return DATA.active.find(w=>w.hz===hz)}
+function renderListenWord(t){
+  const w=findWord(t.word);
+  const distractors=DATA.active.filter(x=>x.hz!==w.hz).slice(0,2);
+  const opts=[w,...distractors].sort(()=>Math.random()-.5);
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">1. Écoute</div><div class="h2">Quel mot entends-tu ?</div><div class="small">Écoute d’abord. N’affiche le pinyin que si tu en as vraiment besoin.</div></div>
+    <button id="playWord" class="btn soft">▶ Écouter</button>
+    <div class="grid3">${opts.map(x=>`<button class="choice wordChoice" data-hz="${x.hz}">${x.hz}</button>`).join('')}</div>
+    <div id="feedback" class="feedback"></div>
+    <div id="wordReveal" class="hidden notice">
+      <div class="bigcn">${w.hz}</div>
+      <div>${w.fr}</div>
+      <button id="showPinyin" class="btn link">Afficher le pinyin</button>
+      <div id="pinyinText" class="hidden small">${w.py}</div>
+    </div>
+    <button id="continueBtn" class="btn primary" disabled>Continuer</button>
+  </div>`;
+  $('playWord').onclick=()=>speak(w.hz,.72);
+  document.querySelectorAll('.wordChoice').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.hz===w.hz;
+    $('feedback').textContent=ok?'Bien. Tu as relié directement le son aux caractères.':'Réécoute une fois.';
+    if(ok){$('wordReveal').classList.remove('hidden');$('continueBtn').disabled=false;state.hanzi=Math.max(state.hanzi,1)}
+  });
+  $('showPinyin').onclick=()=>{$('pinyinText').classList.toggle('hidden');state.pinyin++;updateStats()};
+  $('continueBtn').onclick=nextTask;
+}
+function renderHanziMeaning(t){
+  const w=findWord(t.word);
+  const wrong=DATA.active.filter(x=>x.hz!==w.hz).slice(0,2).map(x=>x.fr);
+  const opts=[w.fr,...wrong].sort(()=>Math.random()-.5);
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">2. Lis les caractères</div><div class="h2">Que veut dire ce mot ?</div></div>
+    <div class="bigcn center">${w.hz}</div>
+    <div class="grid3">${opts.map(x=>`<button class="choice meaningChoice" data-fr="${x}">${x}</button>`).join('')}</div>
+    <div id="feedback" class="feedback"></div>
+    <div id="afterCorrect" class="hidden notice">
+      <div class="small">Avant d’écouter, essaie de prononcer le mot dans ta tête.</div>
+      <div class="row" style="margin-top:8px">
+        <button id="hearCheck" class="btn">▶ Vérifier la prononciation</button>
+        <button id="showPy2" class="btn link">Afficher le pinyin</button>
+      </div>
+      <div id="py2" class="hidden small">${w.py}</div>
+    </div>
+    <button id="continueBtn" class="btn primary" disabled>Continuer</button>
+  </div>`;
+  document.querySelectorAll('.meaningChoice').forEach(b=>b.onclick=()=>{
+    const ok=b.dataset.fr===w.fr;
+    $('feedback').textContent=ok?'Oui. Tu as reconnu le mot sans pinyin.':'Pas encore. Regarde bien les caractères et réessaie.';
+    if(ok){$('afterCorrect').classList.remove('hidden');$('continueBtn').disabled=false;state.hanzi++}
+  });
+  $('hearCheck').onclick=()=>speak(w.hz,.75);
+  $('showPy2').onclick=()=>{$('py2').classList.toggle('hidden');state.pinyin++;updateStats()};
+  $('continueBtn').onclick=nextTask;
+}
+function renderSegment(t){
+  const shuffled=[...t.chunks].sort(()=>Math.random()-.5);let chosen=[];
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">3. Écoute la phrase</div><div class="h2">Remets les groupes dans l’ordre.</div><div class="small">Cherche les groupes de sens, pas chaque syllabe.</div></div>
+    <button id="playSentence" class="btn soft">▶ Écouter la phrase</button>
+    <div id="chunkPool" class="row">${shuffled.map(x=>`<button class="chunk" data-chunk="${x}">${x}</button>`).join('')}</div>
+    <div class="notice"><div class="small">Ta phrase</div><div id="answer" class="row" style="margin-top:8px"></div></div>
+    <div id="feedback" class="feedback"></div>
+    <div class="row"><button id="resetChunks" class="btn">Recommencer</button><button id="continueBtn" class="btn primary" disabled>Continuer</button></div>
+  </div>`;
+  $('playSentence').onclick=()=>speak(t.sentence,.85);
+  function draw(){
+    $('answer').innerHTML=chosen.map(x=>`<span class="pill">${x}</span>`).join('');
+    if(chosen.length===t.chunks.length){
+      const ok=chosen.every((x,i)=>x===t.chunks[i]);
+      $('feedback').textContent=ok?'Parfait. Tu as identifié les groupes de la phrase.':'L’ordre n’est pas encore correct.';
+      $('continueBtn').disabled=!ok;
+    }
+  }
+  document.querySelectorAll('.chunk').forEach(b=>b.onclick=()=>{if(!chosen.includes(b.dataset.chunk)){chosen.push(b.dataset.chunk);draw()}});
+  $('resetChunks').onclick=()=>{chosen=[];$('feedback').textContent='';$('continueBtn').disabled=true;draw()};
+  $('continueBtn').onclick=nextTask;
+}
+function renderNetwork(t){
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">Réseau de caractères</div><div class="h2">Observe le lien entre ces mots.</div></div>
+    <div class="grid2">
+      <div class="notice center"><div class="bigcn">上</div><div><b>上班</b></div><div class="small">上午 👀</div></div>
+      <div class="notice center"><div class="bigcn">下</div><div><b>下班</b></div><div class="small">下午 👀</div></div>
+    </div>
+    <div class="success">上班 ↔ 下班</div>
+    <div class="small">Tu n’as pas quatre nouveaux mots à mémoriser. Commence simplement à remarquer le rôle de 上 et 下.</div>
+    <button id="continueBtn" class="btn primary">Continuer</button>
+  </div>`;$('continueBtn').onclick=nextTask;
+}
+function renderReflex(t){
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">🇫🇷 Réflexe francophone</div><div class="h2">Où placer l’heure en chinois ?</div></div>
+    <div class="grid2">
+      <div class="notice"><div class="small">Français</div><div>Je me lève <b>vers 7 heures</b>.</div></div>
+      <div class="notice"><div class="small">中文</div><div>我｜<b>七点左右</b>｜起床。</div></div>
+    </div>
+    <div class="success">PERSONNE → TEMPS → ACTION</div>
+    <div class="small">En chinois, l’indication de temps vient très souvent avant l’action.</div>
+    <hr/>
+    <div><div class="h2">À toi</div><div class="small">Forme la phrase : « Je commence le travail à 8 h 30. »</div></div>
+    <div class="row">
+      <button class="chip orderChip" data-x="我">我</button>
+      <button class="chip orderChip" data-x="八点半">八点半</button>
+      <button class="chip orderChip" data-x="上班">上班</button>
+    </div>
+    <div class="notice"><div id="orderAnswer" class="row"></div></div>
+    <div id="feedback" class="feedback"></div>
+    <div class="row"><button id="resetOrder" class="btn">Recommencer</button><button id="continueBtn" class="btn primary" disabled>Continuer</button></div>
+  </div>`;
+  let chosen=[];const expected=['我','八点半','上班'];
+  function draw(){
+    $('orderAnswer').innerHTML=chosen.map(x=>`<span class="pill">${x}</span>`).join('');
+    if(chosen.length===3){let ok=chosen.every((x,i)=>x===expected[i]);$('feedback').textContent=ok?'Exact : 我八点半上班。':'Essaie encore.';$('continueBtn').disabled=!ok}
+  }
+  document.querySelectorAll('.orderChip').forEach(b=>b.onclick=()=>{if(!chosen.includes(b.dataset.x)){chosen.push(b.dataset.x);draw()}});
+  $('resetOrder').onclick=()=>{chosen=[];$('feedback').textContent='';$('continueBtn').disabled=true;draw()};
+  $('continueBtn').onclick=nextTask;
+}
+function renderQuick(t){
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">Réponse rapide</div><div class="h2">Réponds sans écrire.</div><div class="small">Tu auras 3 secondes avant de parler.</div></div>
+    <div class="notice center"><div class="bigcn">${t.q}</div><div id="countdown" class="h2" style="margin-top:12px">Prêt ?</div><button id="startQuick" class="btn primary" style="margin-top:10px">Démarrer</button></div>
+    <div id="speakBox" class="hidden success"><b>Parle maintenant.</b><br><span class="small">Réponds avec ta vraie situation.</span></div>
+    <button id="supportBtn" class="btn link">Je bloque → voir un petit indice</button>
+    <div id="support" class="hidden notice">${t.support}</div>
+    <button id="continueBtn" class="btn primary">J’ai répondu · Continuer</button>
+  </div>`;
+  $('startQuick').onclick=()=>{let n=3;$('countdown').textContent=n;$('speakBox').classList.add('hidden');let timer=setInterval(()=>{n--;if(n>0)$('countdown').textContent=n;else{clearInterval(timer);$('countdown').textContent='Maintenant !';$('speakBox').classList.remove('hidden');state.spoken++;updateStats()}},700)};
+  $('supportBtn').onclick=()=>$('support').classList.toggle('hidden');
+  $('continueBtn').onclick=nextTask;
+}
+function renderFinalSpeak(){
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div><div class="small">Mission finale</div><div class="h2">Parle de ta vraie journée.</div><div class="small">3 à 5 phrases suffisent. Pas de pinyin, pas de modèle complet.</div></div>
+    <div class="notice">
+      <div class="small">Si tu en as besoin, pense à :</div>
+      <div style="margin-top:6px">几点起床？ · 几点上班？ · 几点下班？ · 下班以后做什么？ · 几点睡觉？</div>
+    </div>
+    <div id="recorderArea"></div>
+    <div id="recordNote" class="small"></div>
+    <button id="finishBtn" class="btn primary">Terminer la révision</button>
+  </div>`;
+  setupRecorder();
+  $('finishBtn').onclick=renderDone;
+}
+function setupRecorder(){
+  const host=$('recorderArea');
+  let seconds=0,timer=null,blob=null,audioUrl=null,recorded=false,mediaRecorder=null,chunks=[];
+  function fallback(){
+    host.innerHTML=`<div class="stack">
+      <button id="simRec" class="btn">🎙 Simuler un enregistrement</button>
+      <div id="simStatus" class="small">Le prototype peut fonctionner sans microphone.</div>
+    </div>`;
+    $('simRec').onclick=()=>{
+      recorded=true;seconds=8;
+      host.innerHTML=`<div class="row"><button class="btn">▶ Réécouter V1 · 0:08</button><button id="redoSim" class="btn">Recommencer</button><button id="submitSim" class="btn primary">Envoyer à Xinyi</button></div>`;
+      $('redoSim').onclick=fallback;
+      $('submitSim').onclick=()=>{$('submitSim').disabled=true;$('submitSim').textContent='Envoyé ✓';$('recordNote').textContent='Dans la version finale, Xinyi pourra écouter et répondre avec une correction ciblée.';state.spoken++;updateStats()};
+    };
+  }
+  async function tryReal(){
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia||!window.MediaRecorder){fallback();return}
+    host.innerHTML=`<button id="startReal" class="btn">🎙 Enregistrer ma réponse</button><div class="small">Ton navigateur peut demander l’autorisation d’utiliser le micro.</div>`;
+    $('startReal').onclick=async()=>{
+      try{
+        const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+        chunks=[];mediaRecorder=new MediaRecorder(stream);
+        mediaRecorder.ondataavailable=e=>chunks.push(e.data);
+        mediaRecorder.onstop=()=>{blob=new Blob(chunks,{type:'audio/webm'});audioUrl=URL.createObjectURL(blob);stream.getTracks().forEach(tr=>tr.stop());showRecorded()};
+        seconds=0;
+        mediaRecorder.start();
+        host.innerHTML=`<button id="stopReal" class="btn soft">■ Arrêter</button><div class="small">Enregistrement · <span id="sec">0:00</span></div>`;
+        timer=setInterval(()=>{seconds++;$('sec').textContent='0:'+String(seconds).padStart(2,'0')},1000);
+        $('stopReal').onclick=()=>{clearInterval(timer);mediaRecorder.stop()};
+      }catch(e){fallback()}
+    };
+  }
+  function showRecorded(){
+    recorded=true;
+    host.innerHTML=`<div class="stack"><audio controls src="${audioUrl}" style="width:100%"></audio><div class="row"><button id="redoReal" class="btn">Recommencer</button><button id="submitReal" class="btn primary">Envoyer à Xinyi</button></div></div>`;
+    $('redoReal').onclick=()=>{if(audioUrl)URL.revokeObjectURL(audioUrl);tryReal()};
+    $('submitReal').onclick=()=>{$('submitReal').disabled=true;$('submitReal').textContent='Envoyé ✓';$('recordNote').textContent='Prototype : l’audio reste uniquement dans cette page. Dans la version finale, il sera envoyé au professeur.';state.spoken++;updateStats()};
+  }
+  tryReal();
+}
+function renderDone(){
+  $('progressBar').style.width='100%';
+  $('sessionCount').textContent='Terminé';
+  $('taskHost').innerHTML=`<div class="card stack">
+    <div class="title">C’est tout pour aujourd’hui ✓</div>
+    <div class="grid3">
+      <div class="notice"><div class="small">Caractères</div><div class="h2">${state.hanzi} reconnus</div></div>
+      <div class="notice"><div class="small">Oral</div><div class="h2">${state.spoken} réponses</div></div>
+      <div class="notice"><div class="small">Pinyin</div><div class="h2">${state.pinyin} consultations</div></div>
+    </div>
+    <div class="success">Objectif : pouvoir parler de ta journée avec quelques phrases simples, sans dépendre du pinyin.</div>
+    <div class="grid2">
+      <button id="doneHome" class="btn">Retour à l’accueil</button>
+      <a class="btn primary" href="feedback.html">Donner mon avis</a>
+    </div>
+  </div>`;
+  $('doneHome').onclick=showHome;
+}
+
+$('startToday').onclick=()=>startSession('daily');
+document.querySelectorAll('.lessonMode').forEach(b=>b.onclick=()=>{
+  if(b.dataset.mode==='library')showLibrary();else startSession(b.dataset.mode);
+});
+$('backHome').onclick=showHome;
+$('libraryBack').onclick=showHome;
+$('resetBtn').onclick=()=>{
+  state.pinyin=0;state.spoken=0;state.hanzi=0;state.index=0;state.tasks=[];updateStats();showHome();
+};
+updateStats();
+</script>
+</body>
+</html>
