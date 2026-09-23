@@ -1,9 +1,0 @@
-{
-  "name": "Décoder le chinois — Prototype",
-  "short_name": "Décoder chinois",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#f6f7f8",
-  "theme_color": "#111827",
-  "lang": "fr"
-}
