@@ -59,9 +59,83 @@
   setupRec();$('n').onclick=done;
  }
  function setupRec(){
-  const h=$('rec');if(!navigator.mediaDevices||!window.MediaRecorder){h.innerHTML='<div class="notice small">Micro indisponible ici. Dis ta réponse à voix haute.</div>';return;}
-  h.innerHTML='<button id="sr" class="btn">🎙 Enregistrer ma réponse</button>';
-  $('sr').onclick=async()=>{try{const st=await navigator.mediaDevices.getUserMedia({audio:true}),chunks=[],mr=new MediaRecorder(st);mr.ondataavailable=e=>chunks.push(e.data);mr.onstop=()=>{const url=URL.createObjectURL(new Blob(chunks,{type:'audio/webm'}));st.getTracks().forEach(x=>x.stop());h.innerHTML=`<audio controls src="${url}"></audio><div class="small">L’audio reste dans ce navigateur dans cette version test.</div>`;spoken++;};mr.start();h.innerHTML='<button id="stop" class="btn soft">■ Arrêter</button>';$('stop').onclick=()=>mr.stop();}catch(e){h.innerHTML='<div class="notice small">Autorisation micro refusée. Dis simplement ta réponse à voix haute.</div>';}};
+  const h=$('rec');
+  if(!navigator.mediaDevices||!window.MediaRecorder){
+   h.innerHTML='<div class="notice small">Micro indisponible ici. Tu peux quand même dire ta réponse à voix haute.</div>';
+   return;
+  }
+
+  const chooseMime=()=>{
+   const candidates=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
+   return candidates.find(t=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))||'';
+  };
+  const fileInfo=(mime)=>{
+   if((mime||'').includes('mp4'))return {ext:'m4a',type:'audio/mp4'};
+   if((mime||'').includes('ogg'))return {ext:'ogg',type:mime||'audio/ogg'};
+   return {ext:'weba',type:mime||'audio/webm'};
+  };
+
+  const idle=()=>{
+   h.innerHTML='<button id="sr" class="btn recording-main">🎙 Enregistrer ma réponse</button><div class="small recording-help">Tu pourras l’écouter, la refaire puis la partager avec Xinyi.</div>';
+   $('sr').onclick=start;
+  };
+
+  async function start(){
+   try{
+    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    const chunks=[];
+    const preferred=chooseMime();
+    const mr=preferred?new MediaRecorder(stream,{mimeType:preferred}):new MediaRecorder(stream);
+    let seconds=0;
+    const actualMime=mr.mimeType||preferred||'audio/webm';
+
+    mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
+    mr.onstop=()=>{
+     const info=fileInfo(actualMime);
+     const blob=new Blob(chunks,{type:actualMime});
+     const url=URL.createObjectURL(blob);
+     stream.getTracks().forEach(x=>x.stop());
+     spoken++;
+     showReview(blob,url,info);
+    };
+
+    mr.start();
+    h.innerHTML=`<div class="recording-live"><div class="recording-dot"></div><div><b>Enregistrement en cours</b><div class="small" id="timer">0:00</div></div></div><button id="stop" class="btn soft recording-stop">■ Arrêter</button>`;
+    const timer=setInterval(()=>{seconds++;const m=Math.floor(seconds/60),s=String(seconds%60).padStart(2,'0');if($('timer'))$('timer').textContent=m+':'+s;},1000);
+    $('stop').onclick=()=>{clearInterval(timer);mr.stop();};
+   }catch(e){
+    h.innerHTML='<div class="notice small">Autorisation micro refusée ou indisponible. Vérifie l’autorisation du micro dans ton navigateur, puis réessaie.</div><button id="retryRec" class="btn">Réessayer</button>';
+    $('retryRec').onclick=idle;
+   }
+  }
+
+  function showReview(blob,url,info){
+   const stamp=new Date().toISOString().slice(0,10);
+   const safeLesson=String(D.id||id).padStart(2,'0');
+   const filename=`decoder-chinois-L${safeLesson}-${stamp}.${info.ext}`;
+   const file=new File([blob],filename,{type:info.type,lastModified:Date.now()});
+
+   h.innerHTML=`<div class="recording-review stack"><div><div class="task-kicker">Avant d’envoyer</div><div class="task-title recording-title">Écoute ta réponse.</div><div class="task-help">Si tu veux la corriger, réenregistre-la. Sinon, partage-la avec Xinyi.</div></div><audio id="myAudio" controls src="${url}"></audio><div class="recording-actions"><button id="redoRec" class="btn">↻ Réenregistrer</button><button id="shareRec" class="btn primary">Partager avec Xinyi</button></div><div id="shareNote" class="small recording-help">Le bouton ouvre le menu de partage de ton téléphone. Choisis WeChat, WhatsApp, Messages ou e-mail.</div><a id="downloadRec" class="btn link recording-download" href="${url}" download="${filename}">Télécharger l’enregistrement</a></div>`;
+
+   $('redoRec').onclick=()=>{URL.revokeObjectURL(url);idle();};
+   $('shareRec').onclick=async()=>{
+    const note=$('shareNote');
+    const data={files:[file],title:'Décoder le chinois',text:`Décoder le chinois · ${D.title} · Mission orale`};
+    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
+     try{
+      await navigator.share(data);
+      note.textContent='Partage ouvert ✓';
+     }catch(err){
+      if(err&&err.name!=='AbortError')note.textContent='Le partage direct n’a pas fonctionné. Utilise « Télécharger l’enregistrement » ci-dessous.';
+     }
+    }else{
+     note.textContent='Le partage de fichiers n’est pas disponible dans ce navigateur. Télécharge l’enregistrement puis envoie-le à Xinyi dans ton application habituelle.';
+     $('downloadRec').focus();
+    }
+   };
+  }
+
+  idle();
  }
  function done(){
   $('bar').style.width='100%';$('count').textContent='Terminé';

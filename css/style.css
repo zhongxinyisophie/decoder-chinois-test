@@ -148,3 +148,22 @@ textarea{min-height:95px}
   .task-title{font-size:22px}
   .choice.choice-hanzi{font-size:26px}
 }
+
+
+/* v4.3 — oral recording & sharing */
+.recording-main{width:100%}
+.recording-help{line-height:1.5}
+.recording-live{display:flex;align-items:center;gap:12px;padding:14px 0}
+.recording-dot{width:12px;height:12px;border-radius:50%;background:#dc2626;box-shadow:0 0 0 5px rgba(220,38,38,.12)}
+.recording-stop{width:100%}
+.recording-review{gap:16px}
+.recording-title{font-size:21px}
+.recording-review audio{display:block;width:100%;min-height:48px}
+.recording-actions{display:grid;grid-template-columns:1fr 1.35fr;gap:12px}
+.recording-actions .btn{min-height:50px}
+.recording-download{justify-self:start;padding-left:0;padding-right:0}
+@media(max-width:520px){
+ .recording-actions{grid-template-columns:1fr;gap:10px}
+ .recording-actions .btn{width:100%}
+ .recording-title{font-size:22px}
+}
