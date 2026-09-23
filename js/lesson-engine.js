@@ -3,6 +3,7 @@
  const id=Number(Decoder.getParam('id')||1);
  let D;
  try{D=await Decoder.loadLesson(id);}catch(e){$('title').textContent='Leçon introuvable';$('startCard').classList.add('hidden');return;}
+ Decoder.currentLesson=D;
  document.title=D.title+' · Décoder le chinois';
  $('title').textContent=D.title;$('subtitle').textContent=D.fr;
  let i=0,py=0,spoken=0,hanzi=0;
@@ -24,21 +25,21 @@
  }
  function listen(w){
   const opts=[w,...D.active.filter(x=>x[0]!==w[0]).slice(0,2)].sort(()=>Math.random()-.5);
-  $('host').innerHTML=`<div class="card stack"><div><div class="small">Écoute</div><div class="h2">Quel mot entends-tu ?</div><div class="small">N’affiche le pinyin que si tu en as besoin.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="grid3">${opts.map(x=>`<button class="choice opt" data-x="${x[0]}">${x[0]}</button>`).join('')}</div><div id="fb"></div><div id="rev" class="hidden notice"><div class="bigcn">${w[0]}</div><div>${w[2]}</div><button id="pbtn" class="btn link">Afficher le pinyin</button><div id="pt" class="hidden small">${w[1]}</div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
-  $('play').onclick=()=>Decoder.say(w[0],.72);
+  $('host').innerHTML=`<div class="card stack"><div><div class="small">Écoute</div><div class="h2">Quel mot entends-tu ?</div><div class="small">N’affiche le pinyin que si tu en as besoin.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="grid3">${opts.map(x=>`<button class="choice choice-hanzi opt" data-x="${x[0]}">${x[0]}</button>`).join('')}</div><div id="fb"></div><div id="rev" class="hidden notice answer-reveal"><div class="answer-hanzi">${w[0]}</div><div class="answer-meaning">${w[2]}</div><div class="pinyin-wrap"><button id="pbtn" class="btn link">Afficher le pinyin</button><div id="pt" class="hidden pinyin-text">${w[1]}</div></div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
+  $('play').onclick=()=>Decoder.say(w[0],.9);
   document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[0];$('fb').textContent=ok?'Bien.':'Réécoute.';if(ok){$('rev').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
   $('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function meaning(w){
   const opts=[w[2],...D.active.filter(x=>x[0]!==w[0]).slice(0,2).map(x=>x[2])].sort(()=>Math.random()-.5);
-  $('host').innerHTML=`<div class="card stack"><div><div class="small">Lis les caractères</div><div class="h2">Que veut dire ce mot ?</div></div><div class="bigcn center">${w[0]}</div><div class="grid3">${opts.map(x=>`<button class="choice opt" data-x="${x}">${x}</button>`).join('')}</div><div id="fb"></div><div id="after" class="hidden notice"><div class="small">Prononce-le dans ta tête, puis vérifie.</div><button id="check" class="btn">▶ Vérifier</button><button id="pbtn" class="btn link">Afficher le pinyin</button><div id="pt" class="hidden small">${w[1]}</div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
+  $('host').innerHTML=`<div class="card stack"><div><div class="small">Lis les caractères</div><div class="h2">Que veut dire ce mot ?</div></div><div class="bigcn center">${w[0]}</div><div class="grid3">${opts.map(x=>`<button class="choice choice-meaning opt" data-x="${x}">${x}</button>`).join('')}</div><div id="fb"></div><div id="after" class="hidden notice answer-reveal"><div class="small">Prononce-le dans ta tête, puis vérifie.</div><div class="row"><button id="check" class="btn">▶ Vérifier</button><button id="pbtn" class="btn link">Afficher le pinyin</button></div><div id="pt" class="hidden pinyin-text">${w[1]}</div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
   document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[2];$('fb').textContent=ok?'Oui. Tu l’as reconnu sans pinyin.':'Réessaie.';if(ok){$('after').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
   $('check').onclick=()=>Decoder.say(w[0]);$('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function segment(){
   const [s,ch]=D.segment,sh=[...ch].sort(()=>Math.random()-.5);let chosen=[];
   $('host').innerHTML=`<div class="card stack"><div><div class="small">Écoute la phrase</div><div class="h2">Remets les groupes dans l’ordre.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="row">${sh.map(x=>`<button class="chip c" data-x="${x}">${x}</button>`).join('')}</div><div class="notice"><div id="ans" class="row"></div></div><div id="fb"></div><div class="row"><button id="rst" class="btn">Recommencer</button><button id="n" class="btn primary" disabled>Continuer</button></div></div>`;
-  $('play').onclick=()=>Decoder.say(s);
+  $('play').onclick=()=>Decoder.say(s,.88);
   function dr(){$('ans').innerHTML=chosen.map(x=>`<span class="pill">${x}</span>`).join('');if(chosen.length===ch.length){const ok=chosen.every((x,j)=>x===ch[j]);$('fb').textContent=ok?'Très bien.':'L’ordre n’est pas correct.';$('n').disabled=!ok;}}
   document.querySelectorAll('.c').forEach(b=>b.onclick=()=>{if(!chosen.includes(b.dataset.x)){chosen.push(b.dataset.x);dr();}});
   $('rst').onclick=()=>{chosen=[];$('n').disabled=true;$('fb').textContent='';dr();};$('n').onclick=next;
