@@ -17,11 +17,12 @@
   {t:'quick',q:D.quick[3]||D.quick[D.quick.length-1]},
   {t:'final'}
  ];
+ if(D.listening) tasks.splice(5,0,{t:'fullListening'});
  function next(){i++;if(i>=tasks.length)done();else render()}
  function render(){
   $('count').textContent=(i+1)+' / '+tasks.length;$('bar').style.width=((i+1)/tasks.length*100)+'%';
   const t=tasks[i];
-  if(t.t==='listen')listen(t.w);else if(t.t==='meaning')meaning(t.w);else if(t.t==='segment')segment();else if(t.t==='reflex')reflex();else if(t.t==='quick')quick(t.q);else if(t.t==='final')finalTask();
+  if(t.t==='listen')listen(t.w);else if(t.t==='meaning')meaning(t.w);else if(t.t==='segment')segment();else if(t.t==='reflex')reflex();else if(t.t==='quick')quick(t.q);else if(t.t==='fullListening')fullListening();else if(t.t==='final')finalTask();
  }
  function listen(w){
   const opts=[w,...D.active.filter(x=>x[0]!==w[0]).slice(0,2)].sort(()=>Math.random()-.5);
@@ -54,8 +55,14 @@
   $('go').onclick=()=>{let x=3;$('c').textContent=x;const t=setInterval(()=>{x--;if(x>0)$('c').textContent=x;else{clearInterval(t);$('c').textContent='Maintenant !';$('say').classList.remove('hidden');spoken++;}},700);};
   $('hintBtn').onclick=()=>$('hint').classList.toggle('hidden');$('n').onclick=next;
  }
+ function fullListening(){
+  const L=D.listening;
+  const qs=(L.questions||[]).slice(0,2);
+  $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Compréhension orale</div><div class="task-title">Écoute une version, puis réponds à voix haute.</div><div class="task-help">Commence par la version lente si nécessaire. Ne lis la transcription qu’après.</div></div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${L.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${L.naturalUrl}">▶ Version naturelle</a></div>${qs.map(q=>`<div class="notice"><div class="bigcn" style="font-size:22px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}<button id="n" class="btn primary">J’ai répondu · Continuer</button></div>`;
+  $('n').onclick=next;
+ }
  function finalTask(){
-  $('host').innerHTML=`<div class="card stack"><div><div class="small">Mission finale</div><div class="h2">${D.final}</div><div class="small">3 à 5 phrases suffisent. Pas de modèle complet.</div></div><div id="rec"></div><button id="n" class="btn primary">Terminer</button></div>`;
+  $('host').innerHTML=`<div class="card stack"><div><div class="small">Mission finale</div><div class="h2">${D.final}</div><div class="small">${D.finalHelp||'3 à 5 phrases suffisent.'} Pas de modèle complet.</div></div><div id="rec"></div><button id="n" class="btn primary">Terminer</button></div>`;
   setupRec();$('n').onclick=done;
  }
  function setupRec(){
@@ -143,7 +150,14 @@
  }
  function library(){
   $('library').classList.remove('hidden');$('session').classList.add('hidden');$('startCard').classList.add('hidden');
-  $('library').innerHTML=`<div class="between"><button id="closeLib" class="btn">← Retour</button><div class="h2">Tout le contenu</div></div><div class="card stack"><div class="h2">🟢 À utiliser</div><div class="row">${D.active.map(w=>`<span class="chip"><b>${w[0]}</b> <span class="small">${w[2]}</span></span>`).join('')}</div></div><div class="card stack"><div class="h2">🔵 À reconnaître</div><div class="row">${D.recognition.map(w=>`<span class="chip"><b>${w[0]}</b> <span class="small">${w[1]}</span></span>`).join('')}</div></div><div class="card stack"><div class="h2">Phrases-clés</div>${D.sentences.map(s=>`<div class="notice between"><span>${s}</span><button class="btn p" data-s="${s}">▶</button></div>`).join('')}</div><div class="card"><div class="h2">Réseaux</div><div class="grid3">${D.networks.map(n=>`<div class="notice"><b>${n[0]}</b><br><span class="small">${n[1]}</span></div>`).join('')}</div></div>`;
+  const activeHtml=D.active.map(w=>`<div class="notice"><b class="bigcn" style="font-size:20px">${w[0]}</b><div class="pinyin-text">${w[1]}</div><div class="small">${w[2]}</div></div>`).join('');
+  const recognitionHtml=D.recognition.map(w=>{const py=w.length>2?w[1]:'';const fr=w.length>2?w[2]:w[1];return `<div class="notice"><b class="bigcn" style="font-size:20px">${w[0]}</b>${py?`<div class="pinyin-text">${py}</div>`:''}<div class="small">${fr}</div></div>`;}).join('');
+  const phraseData=D.sentenceDetails||D.sentences.map(s=>[s,'','']);
+  const phrasesHtml=phraseData.map(s=>`<div class="notice"><div class="between"><div><div class="bigcn" style="font-size:21px">${s[0]}</div>${s[1]?`<div class="pinyin-text">${s[1]}</div>`:''}${s[2]?`<div class="small">${s[2]}</div>`:''}</div><button class="btn p" data-s="${s[0]}">▶</button></div></div>`).join('');
+  const blocksHtml=D.blocks?`<div class="card stack"><div class="h2">句子积木 · Construis ta phrase</div>${D.blocks.map(b=>`<div class="notice"><div class="small"><b>${b[0]}</b></div><div>${b[1]}</div><div class="bigcn" style="font-size:21px">${b[2]}</div><div class="pinyin-text">${b[3]}</div><div class="small">${b[4]}</div></div>`).join('')}</div>`:'';
+  const reflexHtml=D.reflex?`<div class="card stack"><div class="h2">🇫🇷 Réflexe francophone</div>${D.reflex.map(r=>`<div class="notice"><b>${r[0]}</b><div class="small">${r[1]}</div><div class="bigcn" style="font-size:20px;margin-top:6px">${r[2]}</div><div class="small" style="margin-top:6px">${r[3]}</div></div>`).join('')}</div>`:'';
+  const listeningHtml=D.listening?`<div class="card stack"><div class="h2">听力 · Compréhension orale</div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.naturalUrl}">▶ Version naturelle</a></div><div class="h2">Questions</div>${D.listening.questions.map(q=>`<div class="notice"><div class="bigcn" style="font-size:20px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}<details class="notice"><summary><b>Voir la transcription après l’écoute</b></summary><div class="stack" style="margin-top:12px">${D.listening.script.map(x=>`<div><div class="bigcn" style="font-size:20px">${x[0]}</div><div class="pinyin-text">${x[1]}</div></div>`).join('')}</div><div class="small" style="margin-top:12px">${D.listening.translation||''}</div></details></div>`:'';
+  $('library').innerHTML=`<div class="between"><button id="closeLib" class="btn">← Retour</button><div class="h2">Tout le contenu</div></div><div class="card stack"><div class="h2">🟢 À utiliser</div><div class="grid2">${activeHtml}</div></div><div class="card stack"><div class="h2">🔵 À reconnaître</div><div class="grid2">${recognitionHtml}</div></div>${blocksHtml}<div class="card stack"><div class="h2">Phrases-clés</div>${phrasesHtml}</div><div class="card"><div class="h2">Réseaux</div><div class="grid3">${D.networks.map(n=>`<div class="notice"><b>${n[0]}</b><br><span class="small">${n[1]}</span></div>`).join('')}</div></div>${reflexHtml}${listeningHtml}`;
   $('closeLib').onclick=()=>location.reload();document.querySelectorAll('.p').forEach(b=>b.onclick=()=>Decoder.say(b.dataset.s));
  }
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};
