@@ -13,5 +13,10 @@ window.DECODER_CATALOG = {
     "title": "Leçon 3｜今天吃什么？",
     "fr": "Qu’est-ce qu’on mange aujourd’hui ?",
     "file": "lessons/lesson-03.js"
+  },
+  "4": {
+    "title": "Leçon 4｜这个多少钱？",
+    "fr": "Ça coûte combien ?",
+    "file": "lessons/lesson-04.js"
   }
 };
