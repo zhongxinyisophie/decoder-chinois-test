@@ -91,7 +91,7 @@ window.DECODER_LESSONS[4] = {
     ["我平时穿中码", "但是", "这件中码有点小", "所以", "我试了大码"]
   ],
   "final": "你在一家服装店买衣服。用 3–6 句话问价格、要求试穿、提出一个尺码或颜色要求，并决定买不买。",
-  "finalHelp": "3 à 6 phrases suffisent.",
+  "finalHelp": "Tu achètes un vêtement dans un magasin. En 3 à 6 phrases : demande le prix, demande à essayer le vêtement, précise une taille ou une couleur, puis décide si tu l’achètes.",
   "listening": {
     "slowUrl": "https://youtu.be/eHg029CcbTM",
     "naturalUrl": "https://youtu.be/4VH8O1oWEas",
