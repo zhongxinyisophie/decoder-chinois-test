@@ -79,7 +79,7 @@
   const fileInfo=(mime)=>{
    if((mime||'').includes('mp4'))return {ext:'m4a',type:'audio/mp4'};
    if((mime||'').includes('ogg'))return {ext:'ogg',type:mime||'audio/ogg'};
-   return {ext:'weba',type:mime||'audio/webm'};
+   return {ext:'webm',type:mime||'audio/webm'};
   };
 
   const idle=()=>{
@@ -122,23 +122,36 @@
    const filename=`decoder-chinois-L${safeLesson}-${stamp}.${info.ext}`;
    const file=new File([blob],filename,{type:info.type,lastModified:Date.now()});
 
-   h.innerHTML=`<div class="recording-review stack"><div><div class="task-kicker">Avant d’envoyer</div><div class="task-title recording-title">Écoute ta réponse.</div><div class="task-help">Si tu veux la corriger, réenregistre-la. Sinon, partage-la avec Xinyi.</div></div><audio id="myAudio" controls src="${url}"></audio><div class="recording-actions"><button id="redoRec" class="btn">↻ Réenregistrer</button><button id="shareRec" class="btn primary">Partager avec Xinyi</button></div><div id="shareNote" class="small recording-help">Le bouton ouvre le menu de partage de ton téléphone. Choisis WeChat, WhatsApp, Messages ou e-mail.</div><a id="downloadRec" class="btn link recording-download" href="${url}" download="${filename}">Télécharger l’enregistrement</a></div>`;
+   h.innerHTML=`<div class="recording-review stack"><div><div class="task-kicker">Avant d’envoyer</div><div class="task-title recording-title">Écoute ta réponse.</div><div class="task-help">Si tu veux la corriger, réenregistre-la. Sinon, partage-la avec Xinyi.</div></div><audio id="myAudio" controls src="${url}"></audio><div class="recording-actions"><button id="redoRec" class="btn">↻ Réenregistrer</button><button id="shareRec" class="btn primary">Partager le fichier audio</button></div><div id="shareNote" class="small recording-help">Choisis ton application puis Xinyi comme destinataire. Si le partage est indisponible, télécharge le fichier et joins-le à ton message.</div><a id="downloadRec" class="btn link recording-download" href="${url}" download="${filename}">Télécharger l’enregistrement</a></div>`;
 
    $('redoRec').onclick=()=>{URL.revokeObjectURL(url);idle();};
-   $('shareRec').onclick=async()=>{
+   const fallback=()=>{
     const note=$('shareNote');
-    const data={files:[file],title:'Décoder le chinois',text:`Décoder le chinois · ${D.title} · Mission orale`};
-    if(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]})){
-     try{
-      await navigator.share(data);
-      note.textContent='Partage ouvert ✓';
-     }catch(err){
-      if(err&&err.name!=='AbortError')note.textContent='Le partage direct n’a pas fonctionné. Utilise « Télécharger l’enregistrement » ci-dessous.';
+    note.textContent='Pour envoyer ta réponse : 1. Télécharge le fichier audio ci-dessous. 2. Ouvre ta conversation avec Xinyi. 3. Ajoute ce fichier en pièce jointe. Ton enregistrement reste disponible ici.';
+    $('downloadRec').className='btn primary recording-download';
+    $('downloadRec').focus();
+   };
+   let canShareFile=false;
+   try{canShareFile=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}));}catch(e){}
+   if(!canShareFile){
+    $('shareRec').hidden=true;
+    fallback();
+   }
+   $('shareRec').onclick=async()=>{
+    const button=$('shareRec');
+    if(button.disabled)return;
+    button.disabled=true;
+    try{
+     await navigator.share({files:[file]});
+     $('shareNote').textContent='Menu de partage fermé. Vérifie dans ton application que le fichier a bien été envoyé à Xinyi.';
+    }catch(err){
+     if(err&&err.name==='AbortError'){
+      $('shareNote').textContent='Partage annulé. Tu peux réessayer ou télécharger ton enregistrement.';
+     }else{
+      button.hidden=true;
+      fallback();
      }
-    }else{
-     note.textContent='Le partage de fichiers n’est pas disponible dans ce navigateur. Télécharge l’enregistrement puis envoie-le à Xinyi dans ton application habituelle.';
-     $('downloadRec').focus();
-    }
+    }finally{button.disabled=false;}
    };
   }
 
