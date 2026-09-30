@@ -7,14 +7,15 @@
  document.title=D.title+' · Décoder le chinois';
  $('title').textContent=D.title;$('subtitle').textContent=D.fr;
  let i=0,py=0,spoken=0,hanzi=0;
+ const shuffle=items=>{const out=[...items];for(let j=out.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[out[j],out[k]]=[out[k],out[j]];}return out;};
+ const words=shuffle(D.active);
+ const quickPool=shuffle(D.quick);
  const tasks=[
-  {t:'listen',w:D.active[0]},
-  {t:'meaning',w:D.active[2]||D.active[1]},
-  {t:'meaning',w:D.active[3]||D.active[1]},
+  {t:'listen',w:words[0]},
+  ...words.slice(1,3).map(w=>({t:'meaning',w})),
   {t:'segment'},
-  {t:'reflex'},
-  {t:'quick',q:D.quick[0]},
-  {t:'quick',q:D.quick[3]||D.quick[D.quick.length-1]},
+  {t:'reflex',r:shuffle(D.reflex)[0]},
+  ...quickPool.slice(0,2).map(q=>({t:'quick',q})),
   {t:'final'}
  ];
  if(D.listening) tasks.splice(5,0,{t:'fullListening'});
@@ -22,7 +23,7 @@
  function render(){
   $('count').textContent=(i+1)+' / '+tasks.length;$('bar').style.width=((i+1)/tasks.length*100)+'%';
   const t=tasks[i];
-  if(t.t==='listen')listen(t.w);else if(t.t==='meaning')meaning(t.w);else if(t.t==='segment')segment();else if(t.t==='reflex')reflex();else if(t.t==='quick')quick(t.q);else if(t.t==='fullListening')fullListening();else if(t.t==='final')finalTask();
+  if(t.t==='listen')listen(t.w);else if(t.t==='meaning')meaning(t.w);else if(t.t==='segment')segment();else if(t.t==='reflex')reflex(t.r);else if(t.t==='quick')quick(t.q);else if(t.t==='fullListening')fullListening();else if(t.t==='final')finalTask();
  }
  function listen(w){
   const opts=[w,...D.active.filter(x=>x[0]!==w[0]).slice(0,2)].sort(()=>Math.random()-.5);
@@ -45,19 +46,18 @@
   document.querySelectorAll('.c').forEach(b=>b.onclick=()=>{if(!chosen.includes(b.dataset.x)){chosen.push(b.dataset.x);dr();}});
   $('rst').onclick=()=>{chosen=[];$('n').disabled=true;$('fb').textContent='';dr();};$('n').onclick=next;
  }
- function reflex(){
-  const r=D.reflex[0];
+ function reflex(r){
   $('host').innerHTML=`<div class="card stack"><div><div class="small">🇫🇷 Réflexe francophone</div><div class="h2">${r[0]}</div></div><div class="grid2"><div class="notice">${r[1]}</div><div class="notice bigcn" style="font-size:22px">${r[2]}</div></div><div class="success">${r[3]}</div><button id="n" class="btn primary">Continuer</button></div>`;
   $('n').onclick=next;
  }
  function quick(q){
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Réponse rapide</div><div class="task-title">Réponds sans écrire.</div><div class="task-help">3 secondes, puis parle.</div></div><div class="notice center"><div class="bigcn">${q[0]}</div><div id="c" class="h2">Prêt ?</div><button id="go" class="btn primary">Démarrer</button></div><div id="say" class="hidden success"><b>Parle maintenant.</b></div><button id="hintBtn" class="btn link">Je bloque → indice</button><div id="hint" class="hidden notice">${q[1]}</div><button id="n" class="btn primary">J’ai répondu · Continuer</button></div>`;
-  $('go').onclick=()=>{let x=3;$('c').textContent=x;const t=setInterval(()=>{x--;if(x>0)$('c').textContent=x;else{clearInterval(t);$('c').textContent='Maintenant !';$('say').classList.remove('hidden');spoken++;}},700);};
+  $('go').onclick=()=>{$('go').disabled=true;let x=3;$('c').textContent=x;const t=setInterval(()=>{x--;if(x>0)$('c').textContent=x;else{clearInterval(t);$('c').textContent='Maintenant !';$('say').classList.remove('hidden');spoken++;}},1000);};
   $('hintBtn').onclick=()=>$('hint').classList.toggle('hidden');$('n').onclick=next;
  }
  function fullListening(){
   const L=D.listening;
-  const qs=(L.questions||[]).slice(0,2);
+  const qs=shuffle(L.questions||[]).slice(0,2);
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Compréhension orale</div><div class="task-title">Écoute une version, puis réponds à voix haute.</div><div class="task-help">Commence par la version lente si nécessaire. Ne lis la transcription qu’après.</div></div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${L.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${L.naturalUrl}">▶ Version naturelle</a></div>${qs.map(q=>`<div class="notice"><div class="bigcn" style="font-size:22px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}<button id="n" class="btn primary">J’ai répondu · Continuer</button></div>`;
   $('n').onclick=next;
  }
@@ -163,3 +163,4 @@
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};
  $('libraryBtn').onclick=library;
 })();
+
