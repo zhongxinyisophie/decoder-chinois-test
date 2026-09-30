@@ -33,12 +33,19 @@ Decoder.stopAudio = function(){
     try{ Decoder._activeAudio.pause(); Decoder._activeAudio.currentTime = 0; }catch(e){}
     Decoder._activeAudio = null;
   }
+  Decoder._utterance=null;
   if('speechSynthesis' in window) speechSynthesis.cancel();
 };
 
+Decoder.audioNotice = function(message){
+ let el=document.getElementById('audioStatus');
+ if(!el){el=document.createElement('div');el.id='audioStatus';el.className='notice small';el.setAttribute('role','status');const host=document.getElementById('host')||document.querySelector('.wrap')||document.body;host.prepend(el);}
+ el.textContent=message;el.hidden=!message;
+};
 Decoder.sayTTS = function(text, rate=.9){
-  if(!('speechSynthesis' in window)) return;
+  if(!('speechSynthesis' in window)){Decoder.audioNotice('Lecture vocale indisponible. Ouvre cette page directement dans Safari ou Chrome.');return;}
   Decoder.stopAudio();
+  Decoder.audioNotice('Préparation de la voix…');
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'zh-CN';
   u.rate = rate;
@@ -46,7 +53,12 @@ Decoder.sayTTS = function(text, rate=.9){
   u.volume = 1;
   const voice = Decoder._mandarinVoice || Decoder.refreshMandarinVoice();
   if(voice) u.voice = voice;
-  speechSynthesis.speak(u);
+  Decoder._utterance=u;
+  const timer=setTimeout(()=>{if(Decoder._utterance===u)Decoder.audioNotice('La voix ne démarre pas. Réessaie ; si nécessaire, ouvre la page dans Safari ou Chrome et vérifie que la voix Mandarin est disponible sur ton téléphone.');},6000);
+  u.onstart=()=>{clearTimeout(timer);Decoder.audioNotice('Lecture en cours… Si tu n’entends rien, vérifie le volume et la sortie audio (Bluetooth).');};
+  u.onend=()=>{clearTimeout(timer);if(Decoder._utterance===u){Decoder._utterance=null;Decoder.audioNotice('');}};
+  u.onerror=e=>{clearTimeout(timer);if(Decoder._utterance!==u)return;Decoder._utterance=null;if(e.error!=='canceled'&&e.error!=='interrupted')Decoder.audioNotice('Lecture vocale indisponible ('+(e.error||'erreur')+'). Ouvre la page dans Safari ou Chrome et vérifie que la voix Mandarin est disponible.');};
+  try{speechSynthesis.resume();speechSynthesis.speak(u);}catch(e){clearTimeout(timer);Decoder.audioNotice('Impossible de lancer la voix. Ouvre la page directement dans Safari ou Chrome.');}
 };
 
 /*
