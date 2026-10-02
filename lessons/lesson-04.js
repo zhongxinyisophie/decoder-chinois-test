@@ -113,5 +113,33 @@ window.DECODER_LESSONS[4] = {
       ["回家以后，我又试了一下，还是觉得很合适。", "huí jiā yǐhòu, wǒ yòu shì le yíxià, háishi juéde hěn héshì."]
     ],
     "translation": "Hier, je suis allée au centre commercial acheter des vêtements. J’ai vu un vêtement blanc à 399 yuans. Je l’ai trouvé pas mal, alors j’ai voulu l’essayer. D’habitude, je porte une taille moyenne, mais cette taille était un peu petite ; j’ai donc essayé une grande taille. Elle m’allait très bien. Je préfère toutefois le noir. J’ai demandé à la vendeuse s’il existait en noir ; elle m’a dit oui, et qu’il y avait aujourd’hui 10 % de réduction. Finalement, j’ai acheté le noir. Une fois rentrée, je l’ai réessayé : il m’allait toujours très bien."
-  }
+  },
+  "audio": {
+    "衣服": "audio/lesson-04/01.m4a",
+    "多少钱": "audio/lesson-04/02.m4a",
+    "试一下": "audio/lesson-04/03.m4a",
+    "小码": "audio/lesson-04/04.m4a",
+    "中码": "audio/lesson-04/05.m4a",
+    "大码": "audio/lesson-04/06.m4a",
+    "合适": "audio/lesson-04/07.m4a",
+    "大一点": "audio/lesson-04/08.m4a",
+    "小一点": "audio/lesson-04/09.m4a",
+    "颜色": "audio/lesson-04/10.m4a",
+    "黑色": "audio/lesson-04/11.m4a",
+    "白色": "audio/lesson-04/12.m4a",
+    "折扣": "audio/lesson-04/13.m4a",
+    "我要这个": "audio/lesson-04/14.m4a",
+    "这个多少钱？": "audio/lesson-04/15.m4a",
+    "这个可以试一下吗？": "audio/lesson-04/16.m4a",
+    "你穿多大？": "audio/lesson-04/17.m4a",
+    "我穿中码。": "audio/lesson-04/18.m4a",
+    "这个有点小。": "audio/lesson-04/19.m4a",
+    "有大一点的吗？": "audio/lesson-04/20.m4a",
+    "这个很合适。": "audio/lesson-04/21.m4a",
+    "有别的颜色吗？": "audio/lesson-04/22.m4a",
+    "黑色的有吗？": "audio/lesson-04/23.m4a",
+    "有折扣吗？": "audio/lesson-04/24.m4a",
+    "好，我要这个。": "audio/lesson-04/25.m4a",
+    "我平时穿中码，但是这件中码有点小，所以我试了大码。": "audio/lesson-04/26.m4a"
+}
 };

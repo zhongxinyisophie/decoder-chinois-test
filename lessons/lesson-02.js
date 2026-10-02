@@ -140,5 +140,22 @@ window.DECODER_LESSONS[2] = {
       "休息"
     ]
   ],
-  "final": "用 3–5 句话说说你的周末。"
+  "final": "用 3–5 句话说说你的周末。",
+  "audio": {
+    "周末": "audio/lesson-02/01.m4a",
+    "休息": "audio/lesson-02/02.m4a",
+    "朋友": "audio/lesson-02/03.m4a",
+    "运动": "audio/lesson-02/04.m4a",
+    "公园": "audio/lesson-02/05.m4a",
+    "电影": "audio/lesson-02/06.m4a",
+    "喜欢": "audio/lesson-02/07.m4a",
+    "一起": "audio/lesson-02/08.m4a",
+    "我周末一般休息。": "audio/lesson-02/09.m4a",
+    "我喜欢看电影。": "audio/lesson-02/10.m4a",
+    "我不太喜欢运动。": "audio/lesson-02/11.m4a",
+    "我周末跟朋友一起喝咖啡。": "audio/lesson-02/12.m4a",
+    "这个星期天一起去公园吧。": "audio/lesson-02/13.m4a",
+    "周末我一般九点左右起床。": "audio/lesson-02/14.m4a",
+    "周末我先运动，再跟朋友一起喝咖啡。": "audio/lesson-02/15.m4a"
+}
 };
