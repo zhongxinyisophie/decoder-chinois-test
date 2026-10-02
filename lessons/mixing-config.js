@@ -1,5 +1,23 @@
 window.DECODER_MIXING = {
   "count": 10,
+  "sequence": ["listen", "meaning", "speak", "segment", "listen", "meaning", "segment", "speak", "listen", "meaning"],
+  "wordGroups": [
+    {"lesson":1,"pair":[1,2],"words":["起床","看书","睡觉","左右"]},
+    {"lesson":1,"pair":[1,3],"words":["回家","做饭"]},
+    {"lesson":1,"pair":[1,4],"words":["上班","下班"]},
+    {"lesson":2,"pair":[1,2],"words":["周末","休息","运动","公园","电影"]},
+    {"lesson":2,"pair":[2,3],"words":["朋友","一起"]},
+    {"lesson":2,"pair":[2,4],"words":["喜欢"]},
+    {"lesson":3,"pair":[1,3],"words":["菜单","点菜","推荐","招牌菜","口味","清淡","打包","买单"]},
+    {"lesson":3,"pair":[3,4],"words":["一份","一碗","够"]},
+    {"lesson":4,"pair":[3,4],"words":["多少钱","折扣","我要这个"]},
+    {"lesson":4,"pair":[2,4],"words":["颜色","黑色","白色"]},
+    {"lesson":4,"pair":[1,4],"words":["衣服","试一下","小码","中码","大码","合适","大一点","小一点"]}
+  ],
+  "segments": [
+    {"lesson":1,"pair":[1,2]}, {"lesson":2,"pair":[1,2]},
+    {"lesson":3,"pair":[1,3]}, {"lesson":4,"pair":[1,4]}
+  ],
   "pairs": [
     {"lessons":[1,2],"weight":5,"tasks":[
       {"kind":"card","eyebrow":"L1 + L2","title":"看书 → 看电影","body":"看 revient dans plusieurs expressions. Lis les deux sans pinyin, puis dis laquelle correspond à ton week-end."},
