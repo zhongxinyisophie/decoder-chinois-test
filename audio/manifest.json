@@ -1,0 +1,642 @@
+[
+  {
+    "lesson": 1,
+    "text": "起床",
+    "file": "audio/lesson-01/01.m4a",
+    "sourceStart": 0.46,
+    "sourceEnd": 2.432,
+    "sha256": "5159eb6401f95acd70a0e8baf9547753ecd47281beedcd4a5f8a7a1079d944b8"
+  },
+  {
+    "lesson": 1,
+    "text": "上班",
+    "file": "audio/lesson-01/02.m4a",
+    "sourceStart": 4.38,
+    "sourceEnd": 6.535,
+    "sha256": "e3b0c964d19179596b318f65261bd182a784062e5231a179c0415fc02cd03600"
+  },
+  {
+    "lesson": 1,
+    "text": "下班",
+    "file": "audio/lesson-01/03.m4a",
+    "sourceStart": 8.827,
+    "sourceEnd": 10.36,
+    "sha256": "6e9f4b00dd0cd09fafb5459af44c0fedb482c416efa71f740395ef31230d8ef0"
+  },
+  {
+    "lesson": 1,
+    "text": "回家",
+    "file": "audio/lesson-01/04.m4a",
+    "sourceStart": 12.82,
+    "sourceEnd": 14.481,
+    "sha256": "fa0e5a4d7867b62087c70cca4fc2ffe80e57a3a4e63084b6806b32540436e6ec"
+  },
+  {
+    "lesson": 1,
+    "text": "做饭",
+    "file": "audio/lesson-01/05.m4a",
+    "sourceStart": 17.98,
+    "sourceEnd": 19.342,
+    "sha256": "b05f9cd6bb14103fdf5eee05db03b5bf2152b58812e84545d1aaee520a3116ae"
+  },
+  {
+    "lesson": 1,
+    "text": "看书",
+    "file": "audio/lesson-01/06.m4a",
+    "sourceStart": 22.885,
+    "sourceEnd": 24.497,
+    "sha256": "6930465d17e95205236bbead5e475882e427b9e5c932914728df8c6006cdb739"
+  },
+  {
+    "lesson": 1,
+    "text": "睡觉",
+    "file": "audio/lesson-01/07.m4a",
+    "sourceStart": 27.354,
+    "sourceEnd": 28.91,
+    "sha256": "746b8fe45dfbc59f8b4e65b898ec3586d8a3fad93a0742b5564bb42a6a353941"
+  },
+  {
+    "lesson": 1,
+    "text": "左右",
+    "file": "audio/lesson-01/08.m4a",
+    "sourceStart": 31.98,
+    "sourceEnd": 33.443,
+    "sha256": "4be7f127b6e4404940306de7de92cea702dff5b55be65a597ec03a53a03511a8"
+  },
+  {
+    "lesson": 1,
+    "text": "我七点左右起床。",
+    "file": "audio/lesson-01/09.m4a",
+    "sourceStart": 37.15,
+    "sourceEnd": 40.492,
+    "sha256": "660798222c1444966b1008d200ede03e418372c0a002d50fd212a2fe7c657df4"
+  },
+  {
+    "lesson": 1,
+    "text": "我八点半上班。",
+    "file": "audio/lesson-01/10.m4a",
+    "sourceStart": 44.02,
+    "sourceEnd": 46.95,
+    "sha256": "dbb54b49afef46abc4cf09e7be3d8a27eeb3d2ea5326de8a1a8eef16caffb0c2"
+  },
+  {
+    "lesson": 1,
+    "text": "我下午六点下班。",
+    "file": "audio/lesson-01/11.m4a",
+    "sourceStart": 49.78,
+    "sourceEnd": 53.284,
+    "sha256": "29c314e7cd2d50afdc860701c44f1d0d947047780de2c08f7eff147ccfadd3c5"
+  },
+  {
+    "lesson": 1,
+    "text": "下班以后，我回家。",
+    "file": "audio/lesson-01/12.m4a",
+    "sourceStart": 56.04,
+    "sourceEnd": 59.729,
+    "sha256": "9ee8fbf6c5b8e941b1126be6f4e8a9284465eedd711ee219dbd86b9518c6b445"
+  },
+  {
+    "lesson": 1,
+    "text": "回家以后，我做饭。",
+    "file": "audio/lesson-01/13.m4a",
+    "sourceStart": 62.98,
+    "sourceEnd": 66.88,
+    "sha256": "ccd06de4fe7347acefce2ccf8e0ff129da9b64bf819fe65ed0c793737ab1ef41"
+  },
+  {
+    "lesson": 1,
+    "text": "我先做饭，再看书。",
+    "file": "audio/lesson-01/14.m4a",
+    "sourceStart": 69.48,
+    "sourceEnd": 74.057,
+    "sha256": "b500c8093b846516cd106e6792a52bbdd49b7bfaee9c39a20d4c3012b385cb11"
+  },
+  {
+    "lesson": 1,
+    "text": "我一般十一点左右睡觉。",
+    "file": "audio/lesson-01/15.m4a",
+    "sourceStart": 76.8,
+    "sourceEnd": 80.723,
+    "sha256": "37f93d51bb0097515640252d8fd5f2fb738841a495cf9986b1c75b486cae168d"
+  },
+  {
+    "lesson": 2,
+    "text": "周末",
+    "file": "audio/lesson-02/01.m4a",
+    "sourceStart": 1.42,
+    "sourceEnd": 3.005,
+    "sha256": "3076a8cff416bee5ad4bcf6194e8509b8f7e7fe84e7b1131a4d0fa282236c2ca"
+  },
+  {
+    "lesson": 2,
+    "text": "休息",
+    "file": "audio/lesson-02/02.m4a",
+    "sourceStart": 4.08,
+    "sourceEnd": 5.9,
+    "sha256": "f4f2e82f7a80cffa0e425020a5515320476892fcc51db596554e3fdc2e0a534c"
+  },
+  {
+    "lesson": 2,
+    "text": "朋友",
+    "file": "audio/lesson-02/03.m4a",
+    "sourceStart": 6.28,
+    "sourceEnd": 8.556,
+    "sha256": "a8e3e67243ca7738ab519264e2cf642e04972b1cb1633615d33081e5a8a450a6"
+  },
+  {
+    "lesson": 2,
+    "text": "运动",
+    "file": "audio/lesson-02/04.m4a",
+    "sourceStart": 9.9,
+    "sourceEnd": 11.31,
+    "sha256": "fd01d8646443700789b4601096ab89a85dcf0a699fc8f9fc05d5721a356a20e1"
+  },
+  {
+    "lesson": 2,
+    "text": "公园",
+    "file": "audio/lesson-02/05.m4a",
+    "sourceStart": 12.52,
+    "sourceEnd": 14.153,
+    "sha256": "9a6a8ad8ae5dbbe6b58d8adf621373b9f96a69fbd97a0cae068141568f83b593"
+  },
+  {
+    "lesson": 2,
+    "text": "电影",
+    "file": "audio/lesson-02/06.m4a",
+    "sourceStart": 15.8,
+    "sourceEnd": 17.253,
+    "sha256": "0f43b92e5c27a5f46a62ebc3a912f5f0bb48cdef694b454db005cf2668fb898f"
+  },
+  {
+    "lesson": 2,
+    "text": "喜欢",
+    "file": "audio/lesson-02/07.m4a",
+    "sourceStart": 18.705,
+    "sourceEnd": 20.022,
+    "sha256": "52982c5f4d96442a9f71114bd1a8603fef530595a24a7182436e757fd0b8f278"
+  },
+  {
+    "lesson": 2,
+    "text": "一起",
+    "file": "audio/lesson-02/08.m4a",
+    "sourceStart": 21.5,
+    "sourceEnd": 23.02,
+    "sha256": "d5d00dee4a0a9bf3d3d19a6946a39ee8bd7f954ec5835b10248f3bb0e49dfd2c"
+  },
+  {
+    "lesson": 2,
+    "text": "我周末一般休息。",
+    "file": "audio/lesson-02/09.m4a",
+    "sourceStart": 24.97,
+    "sourceEnd": 28.39,
+    "sha256": "a9d2c5697379ff91201298fb18394285de8af14c4d67721654778eb53dce283d"
+  },
+  {
+    "lesson": 2,
+    "text": "我喜欢看电影。",
+    "file": "audio/lesson-02/10.m4a",
+    "sourceStart": 29.94,
+    "sourceEnd": 32.995,
+    "sha256": "fd52b0a91109f9061f7cec9b246bbf43edbce1d0c62e9674882be1dd2a1edba5"
+  },
+  {
+    "lesson": 2,
+    "text": "我不太喜欢运动。",
+    "file": "audio/lesson-02/11.m4a",
+    "sourceStart": 34.71,
+    "sourceEnd": 37.525,
+    "sha256": "fa200f804dc363580e0318f901975b3c7d168747f1a3dcb14844e6574dd1c2a1"
+  },
+  {
+    "lesson": 2,
+    "text": "我周末跟朋友一起喝咖啡。",
+    "file": "audio/lesson-02/12.m4a",
+    "sourceStart": 39.62,
+    "sourceEnd": 44.166,
+    "sha256": "556b80ec944243a8e8ba0ed573f6f632b56b19b5b12f47c1e2c63e74bb697aa5"
+  },
+  {
+    "lesson": 2,
+    "text": "这个星期天一起去公园吧。",
+    "file": "audio/lesson-02/13.m4a",
+    "sourceStart": 45.26,
+    "sourceEnd": 49.94,
+    "sha256": "3579311480716f3aab758b95add160bbcb7834acb3597820c02ee50f712dc310"
+  },
+  {
+    "lesson": 2,
+    "text": "周末我一般九点左右起床。",
+    "file": "audio/lesson-02/14.m4a",
+    "sourceStart": 51.86,
+    "sourceEnd": 56.494,
+    "sha256": "025fd98f98fdcf18d47e603d4552cbc0f4a65c84c8147b7a6e32ef12c215b644"
+  },
+  {
+    "lesson": 2,
+    "text": "周末我先运动，再跟朋友一起喝咖啡。",
+    "file": "audio/lesson-02/15.m4a",
+    "sourceStart": 58.4,
+    "sourceEnd": 64.935,
+    "sha256": "37735464148bef359ff8ee1053b77d2ebb4705c2d970da548b4c89f5fc3cd3b8"
+  },
+  {
+    "lesson": 3,
+    "text": "菜单",
+    "file": "audio/lesson-03/01.m4a",
+    "sourceStart": 1.54,
+    "sourceEnd": 3.146,
+    "sha256": "96bbb02b58274aa437bd2cbe5eb77d0a6bdfc50558d4f6e5baa2dffb85d7ca72"
+  },
+  {
+    "lesson": 3,
+    "text": "点菜",
+    "file": "audio/lesson-03/02.m4a",
+    "sourceStart": 4.92,
+    "sourceEnd": 6.51,
+    "sha256": "e44ca60afa30b6528b01a6105097f08b9346ff01f4699840ee80ec46e317e1e1"
+  },
+  {
+    "lesson": 3,
+    "text": "推荐",
+    "file": "audio/lesson-03/03.m4a",
+    "sourceStart": 8.84,
+    "sourceEnd": 10.127,
+    "sha256": "50ba3eb9d20314acd332756815b53e5d5a47e05699b69fe8a0d04db8f1b35766"
+  },
+  {
+    "lesson": 3,
+    "text": "招牌菜",
+    "file": "audio/lesson-03/04.m4a",
+    "sourceStart": 12.38,
+    "sourceEnd": 14.046,
+    "sha256": "14e24c3d3a9209349d36f935eedcfa7c3e7750215179782c6c470a32266a1a28"
+  },
+  {
+    "lesson": 3,
+    "text": "口味",
+    "file": "audio/lesson-03/05.m4a",
+    "sourceStart": 16.06,
+    "sourceEnd": 17.365,
+    "sha256": "effd3276b1ed8dc28edf95a5340b5e62720fa3e47043953369474e68ac1c0933"
+  },
+  {
+    "lesson": 3,
+    "text": "清淡",
+    "file": "audio/lesson-03/06.m4a",
+    "sourceStart": 19.364,
+    "sourceEnd": 20.62,
+    "sha256": "13e5192662de8ccf798044744ae12a4ab096e8aa3b4171b00fbc07250ae5a0e3"
+  },
+  {
+    "lesson": 3,
+    "text": "一份",
+    "file": "audio/lesson-03/07.m4a",
+    "sourceStart": 22.55,
+    "sourceEnd": 23.753,
+    "sha256": "1670f4d142a9430fe266a625d01b249facb7e4b2d382a54bfb1d9c884532896e"
+  },
+  {
+    "lesson": 3,
+    "text": "一碗",
+    "file": "audio/lesson-03/08.m4a",
+    "sourceStart": 25.8,
+    "sourceEnd": 27.111,
+    "sha256": "aca93ecf64fc99f0c54beea03d6c700fbbcaee1d3f6e230812d149a30af011cf"
+  },
+  {
+    "lesson": 3,
+    "text": "够",
+    "file": "audio/lesson-03/09.m4a",
+    "sourceStart": 28.84,
+    "sourceEnd": 29.85,
+    "sha256": "4207ac24f0274b27ad81a75e19c92ded291a41c3dff6cbe435168013608e589b"
+  },
+  {
+    "lesson": 3,
+    "text": "打包",
+    "file": "audio/lesson-03/10.m4a",
+    "sourceStart": 31.71,
+    "sourceEnd": 33.092,
+    "sha256": "0a4799fa7ed012b7c9b141dd85bb801b41163b07107e4c6499cb23aba9ab734a"
+  },
+  {
+    "lesson": 3,
+    "text": "买单",
+    "file": "audio/lesson-03/11.m4a",
+    "sourceStart": 34.85,
+    "sourceEnd": 36.195,
+    "sha256": "8869127b6cf35554c6c709cfed75a8213824608a28a3ef83e96670562757d73d"
+  },
+  {
+    "lesson": 3,
+    "text": "有什么推荐的吗？",
+    "file": "audio/lesson-03/12.m4a",
+    "sourceStart": 39.63,
+    "sourceEnd": 41.97,
+    "sha256": "4725fc535b5094162d90e7cc5e435bdd36a9ef7f53ac3eca10f70057a16704c7"
+  },
+  {
+    "lesson": 3,
+    "text": "你们有什么招牌菜？",
+    "file": "audio/lesson-03/13.m4a",
+    "sourceStart": 44.22,
+    "sourceEnd": 47.209,
+    "sha256": "645146680e786af9ab5479a80a762a048ac18f564a4400cbfeac0fde80ec01c1"
+  },
+  {
+    "lesson": 3,
+    "text": "这个里面有什么？",
+    "file": "audio/lesson-03/14.m4a",
+    "sourceStart": 49.6,
+    "sourceEnd": 52.348,
+    "sha256": "4d702ba224ea78c00923ff2ab61eb0f26d196bc5f53d294fb6d1d4e4563e368f"
+  },
+  {
+    "lesson": 3,
+    "text": "这个是用什么做的？",
+    "file": "audio/lesson-03/15.m4a",
+    "sourceStart": 54.91,
+    "sourceEnd": 57.761,
+    "sha256": "758751bfc35583856f195e86b7f96487666f50c4820b4be611bbaf1cd004648b"
+  },
+  {
+    "lesson": 3,
+    "text": "我不太能吃辣。",
+    "file": "audio/lesson-03/16.m4a",
+    "sourceStart": 59.61,
+    "sourceEnd": 62.67,
+    "sha256": "be7b6225a913256d9a43eae94d140784e98e75e811289439b519e0cfab0d7bfc"
+  },
+  {
+    "lesson": 3,
+    "text": "微辣就可以。",
+    "file": "audio/lesson-03/17.m4a",
+    "sourceStart": 64.8,
+    "sourceEnd": 67.511,
+    "sha256": "0e1d3be9ef21e9a3c8351e48aa2f8524af96e95373d38dd25de61b76bebe9808"
+  },
+  {
+    "lesson": 3,
+    "text": "清淡一点。",
+    "file": "audio/lesson-03/18.m4a",
+    "sourceStart": 70.26,
+    "sourceEnd": 71.89,
+    "sha256": "bfdbefe4719e9c7d9a5f25770be3b98fb5a16a3cb560806015c8694aefa3c4e8"
+  },
+  {
+    "lesson": 3,
+    "text": "不要香菜。",
+    "file": "audio/lesson-03/19.m4a",
+    "sourceStart": 74.08,
+    "sourceEnd": 75.795,
+    "sha256": "2e85c8488a90f6445faf4765e285142c6229f28470f43929e0299dab35a4d1e4"
+  },
+  {
+    "lesson": 3,
+    "text": "这个来一份。",
+    "file": "audio/lesson-03/20.m4a",
+    "sourceStart": 78.76,
+    "sourceEnd": 80.706,
+    "sha256": "f9c1b1f8ff2960e04c70d99390a5ca419d5c11fe8bb9cca9f1c113e7b7da3fcb"
+  },
+  {
+    "lesson": 3,
+    "text": "这个够几个人吃？",
+    "file": "audio/lesson-03/21.m4a",
+    "sourceStart": 83.62,
+    "sourceEnd": 86.385,
+    "sha256": "0fac6d199f59c4dad7fef7db16450f89a09adb7123557957ae64503d1a9955f6"
+  },
+  {
+    "lesson": 3,
+    "text": "先这些，谢谢。",
+    "file": "audio/lesson-03/22.m4a",
+    "sourceStart": 88.82,
+    "sourceEnd": 90.835,
+    "sha256": "822418bb3c9b29f871427d619d62c07b34d5dfdb26e5af2ec0863d8d64a55c0f"
+  },
+  {
+    "lesson": 3,
+    "text": "最后还有一点菜没吃完，所以我们就打包带回家了。",
+    "file": "audio/lesson-03/23.m4a",
+    "sourceStart": 94.521,
+    "sourceEnd": 102.83,
+    "sha256": "32fa4c22b76891f846c5cfd764665f89cd7ad06bb110d3e4b4726161b8fd50e1"
+  },
+  {
+    "lesson": 3,
+    "text": "我朋友很能吃辣，但是我不太能吃辣。",
+    "file": "audio/lesson-03/24.m4a",
+    "sourceStart": 105.01,
+    "sourceEnd": 110.95,
+    "sha256": "326c6f7782967950f76d707ef9edf833ab663e24dfc2d74ac8b1840fee7fe184"
+  },
+  {
+    "lesson": 4,
+    "text": "衣服",
+    "file": "audio/lesson-04/01.m4a",
+    "sourceStart": 1.06,
+    "sourceEnd": 2.523,
+    "sha256": "92d73955013632fd9d09c58b03cb282c5911d445a97a5bedc37b2d639329d86b"
+  },
+  {
+    "lesson": 4,
+    "text": "多少钱",
+    "file": "audio/lesson-04/02.m4a",
+    "sourceStart": 4.07,
+    "sourceEnd": 5.975,
+    "sha256": "43f6fb31dbcf4b706c99052179ba8e1f41e0abb73e607c78ff784b996ff2eddb"
+  },
+  {
+    "lesson": 4,
+    "text": "试一下",
+    "file": "audio/lesson-04/03.m4a",
+    "sourceStart": 7.44,
+    "sourceEnd": 8.955,
+    "sha256": "6f33be5f0a744583954a38116132f3ce132588dd090058f360dfa202f6bb455f"
+  },
+  {
+    "lesson": 4,
+    "text": "小码",
+    "file": "audio/lesson-04/04.m4a",
+    "sourceStart": 11.01,
+    "sourceEnd": 12.675,
+    "sha256": "65115abd4ced06e975dffa45f52e1fb324d06d0b54220ef5654cf96eb5c109b8"
+  },
+  {
+    "lesson": 4,
+    "text": "中码",
+    "file": "audio/lesson-04/05.m4a",
+    "sourceStart": 14.58,
+    "sourceEnd": 16.056,
+    "sha256": "81df58f5d17ce6478ce57fe4d711704f16925b6e4c8c07e88e6e062410a0429d"
+  },
+  {
+    "lesson": 4,
+    "text": "大码",
+    "file": "audio/lesson-04/06.m4a",
+    "sourceStart": 17.7,
+    "sourceEnd": 19.097,
+    "sha256": "af48cd3e77fdd2cc96ab2125e385bba3b577b77de7a4c60f0bbef45737ca3f6d"
+  },
+  {
+    "lesson": 4,
+    "text": "合适",
+    "file": "audio/lesson-04/07.m4a",
+    "sourceStart": 20.87,
+    "sourceEnd": 22.242,
+    "sha256": "4442f2680ff82fa4af5d46df24453ff7cc919d6ebd52e7f1c1dea43ea0377678"
+  },
+  {
+    "lesson": 4,
+    "text": "大一点",
+    "file": "audio/lesson-04/08.m4a",
+    "sourceStart": 23.93,
+    "sourceEnd": 25.271,
+    "sha256": "40ad31fb1f9142cc8965575b90314a15a686e97e6e0adb2b97f8ed70f29105a3"
+  },
+  {
+    "lesson": 4,
+    "text": "小一点",
+    "file": "audio/lesson-04/09.m4a",
+    "sourceStart": 27.289,
+    "sourceEnd": 28.646,
+    "sha256": "19444be3a5a4cc0779d3e70e94099d408d96a152d6ca9810c3c4a6b1ed5274d5"
+  },
+  {
+    "lesson": 4,
+    "text": "颜色",
+    "file": "audio/lesson-04/10.m4a",
+    "sourceStart": 30.607,
+    "sourceEnd": 31.975,
+    "sha256": "b4a240e2ab69650bfe2f02b4d22de886381b9ea3d3dfaf7fd417125ad0d0b461"
+  },
+  {
+    "lesson": 4,
+    "text": "黑色",
+    "file": "audio/lesson-04/11.m4a",
+    "sourceStart": 33.79,
+    "sourceEnd": 35.155,
+    "sha256": "d76162f9c4736d2739bc3fe0e3b0b2baa31a29769c72cb5d6c69ecef16a70352"
+  },
+  {
+    "lesson": 4,
+    "text": "白色",
+    "file": "audio/lesson-04/12.m4a",
+    "sourceStart": 36.75,
+    "sourceEnd": 38.057,
+    "sha256": "aa5be325143912badac114889dea198dd709a18ccd880acd154888ab342c7458"
+  },
+  {
+    "lesson": 4,
+    "text": "折扣",
+    "file": "audio/lesson-04/13.m4a",
+    "sourceStart": 39.98,
+    "sourceEnd": 41.212,
+    "sha256": "e8e9321f49d93effd21f459c973a088933b7e0755c9a9384abdc070198ea55af"
+  },
+  {
+    "lesson": 4,
+    "text": "我要这个",
+    "file": "audio/lesson-04/14.m4a",
+    "sourceStart": 42.78,
+    "sourceEnd": 44.294,
+    "sha256": "568cd33a8eb86c2f1eac4702d9b5ef2aa61cabd68fa4e103615effddafd38636"
+  },
+  {
+    "lesson": 4,
+    "text": "这个多少钱？",
+    "file": "audio/lesson-04/15.m4a",
+    "sourceStart": 46.38,
+    "sourceEnd": 49.727,
+    "sha256": "a8d8c425f473794602cb250900e317e1bec8494e7315f523b016e9f77acac2f6"
+  },
+  {
+    "lesson": 4,
+    "text": "这个可以试一下吗？",
+    "file": "audio/lesson-04/16.m4a",
+    "sourceStart": 52.12,
+    "sourceEnd": 55.575,
+    "sha256": "e922fc4cd78cbe208bc97871386e7b2ac52b194b50705546309dcf991c32c4b1"
+  },
+  {
+    "lesson": 4,
+    "text": "你穿多大？",
+    "file": "audio/lesson-04/17.m4a",
+    "sourceStart": 57.98,
+    "sourceEnd": 59.62,
+    "sha256": "ab81d4e725c1582b16af62575c19f7cb07ca28d381460a1dca6d3be63a13d273"
+  },
+  {
+    "lesson": 4,
+    "text": "我穿中码。",
+    "file": "audio/lesson-04/18.m4a",
+    "sourceStart": 61.97,
+    "sourceEnd": 63.77,
+    "sha256": "daaa8b0ac9e361d41d0e5b9f5fe7cd84f8ff0b9afc305dfff3c19d465b968273"
+  },
+  {
+    "lesson": 4,
+    "text": "这个有点小。",
+    "file": "audio/lesson-04/19.m4a",
+    "sourceStart": 65.91,
+    "sourceEnd": 68.15,
+    "sha256": "3087129b77510a06f40d5c1d9a419cc7966e8081b8bffa501abb3e34594883ab"
+  },
+  {
+    "lesson": 4,
+    "text": "有大一点的吗？",
+    "file": "audio/lesson-04/20.m4a",
+    "sourceStart": 70.2,
+    "sourceEnd": 72.0,
+    "sha256": "fb182625dc4380f7ae0b245a29a918ac61e245e3879c4179c46e9c87a65d3c35"
+  },
+  {
+    "lesson": 4,
+    "text": "这个很合适。",
+    "file": "audio/lesson-04/21.m4a",
+    "sourceStart": 74.39,
+    "sourceEnd": 76.63,
+    "sha256": "0d98ddf9fa0c1177e42a391ecaef1f5bf1c2feeb1c430fb57c8fb664c18f2192"
+  },
+  {
+    "lesson": 4,
+    "text": "有别的颜色吗？",
+    "file": "audio/lesson-04/22.m4a",
+    "sourceStart": 78.96,
+    "sourceEnd": 80.906,
+    "sha256": "f017d5f7663f2d30a547ad65e8d1c34d4a7961d765562f872606be4372c62df9"
+  },
+  {
+    "lesson": 4,
+    "text": "黑色的有吗？",
+    "file": "audio/lesson-04/23.m4a",
+    "sourceStart": 83.24,
+    "sourceEnd": 84.84,
+    "sha256": "e13abafd9a8270dbe54ca664856e17fe46eddeb96f1cf733a14abb9af27c44b1"
+  },
+  {
+    "lesson": 4,
+    "text": "有折扣吗？",
+    "file": "audio/lesson-04/24.m4a",
+    "sourceStart": 87.8,
+    "sourceEnd": 89.356,
+    "sha256": "292ac7098594bd4f17d604a8b9abcefd16f9e2507769fb0095ab8d29547cf6c6"
+  },
+  {
+    "lesson": 4,
+    "text": "好，我要这个。",
+    "file": "audio/lesson-04/25.m4a",
+    "sourceStart": 91.8,
+    "sourceEnd": 93.967,
+    "sha256": "f5eb5b4990de9641293493d99f7c9b6bcec2e6f4e9984ee859df55aeba6648a9"
+  },
+  {
+    "lesson": 4,
+    "text": "我平时穿中码，但是这件中码有点小，所以我试了大码。",
+    "file": "audio/lesson-04/26.m4a",
+    "sourceStart": 96.93,
+    "sourceEnd": 107.89,
+    "sha256": "c32e0fef85a9eeec637a3c82002d6e1a38643463de1ce1fa38d463eba895ebd5"
+  }
+]

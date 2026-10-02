@@ -64,5 +64,35 @@ window.DECODER_LESSONS[3] = {
     ["我朋友", "很能吃辣", "但是", "我", "不太能吃辣"]
   ],
   "final": "你和朋友在餐馆点菜。用 3–5 句话问推荐、点菜，并说明一个口味或份量要求。",
-  "listeningScript": "今天晚上，我跟朋友去一家川菜馆吃饭。到了以后，我们先扫码看菜单。我朋友很能吃辣，但是我不太能吃辣。我们点了一份番茄炒蛋、一份微辣的宫保鸡丁、一份青菜和两碗米饭，还要了一壶茶。宫保鸡丁有一点辣，但是很好吃。最后还有一点菜没吃完，所以我们就打包带回家了。"
+  "listeningScript": "今天晚上，我跟朋友去一家川菜馆吃饭。到了以后，我们先扫码看菜单。我朋友很能吃辣，但是我不太能吃辣。我们点了一份番茄炒蛋、一份微辣的宫保鸡丁、一份青菜和两碗米饭，还要了一壶茶。宫保鸡丁有一点辣，但是很好吃。最后还有一点菜没吃完，所以我们就打包带回家了。",
+  "audio": {
+    "菜单": "audio/lesson-03/01.m4a",
+    "点菜": "audio/lesson-03/02.m4a",
+    "推荐": "audio/lesson-03/03.m4a",
+    "招牌菜": "audio/lesson-03/04.m4a",
+    "口味": "audio/lesson-03/05.m4a",
+    "清淡": "audio/lesson-03/06.m4a",
+    "一份": "audio/lesson-03/07.m4a",
+    "一碗": "audio/lesson-03/08.m4a",
+    "够": "audio/lesson-03/09.m4a",
+    "打包": "audio/lesson-03/10.m4a",
+    "买单": "audio/lesson-03/11.m4a",
+    "有什么推荐的吗？": "audio/lesson-03/12.m4a",
+    "你们有什么招牌菜？": "audio/lesson-03/13.m4a",
+    "这个里面有什么？": "audio/lesson-03/14.m4a",
+    "这个是用什么做的？": "audio/lesson-03/15.m4a",
+    "我不太能吃辣。": "audio/lesson-03/16.m4a",
+    "微辣就可以。": "audio/lesson-03/17.m4a",
+    "清淡一点。": "audio/lesson-03/18.m4a",
+    "不要香菜。": "audio/lesson-03/19.m4a",
+    "这个来一份。": "audio/lesson-03/20.m4a",
+    "这个够几个人吃？": "audio/lesson-03/21.m4a",
+    "先这些，谢谢。": "audio/lesson-03/22.m4a",
+    "最后还有一点菜没吃完，所以我们就打包带回家了。": "audio/lesson-03/23.m4a",
+    "我朋友很能吃辣，但是我不太能吃辣。": "audio/lesson-03/24.m4a"
+},
+  "listening": {
+    "slowUrl": "https://www.youtube.com/watch?v=7dzG4r02LTM&list=PLPXlnPJE-lcg&index=10",
+    "naturalUrl": "https://www.youtube.com/watch?v=kKU9H-1DBZo&list=PLPXlnPJE-lcg&index=9"
+}
 };

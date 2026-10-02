@@ -147,5 +147,26 @@ window.DECODER_LESSONS[1] = {
       "起床"
     ]
   ],
-  "final": "用 3–5 句话说说你的一天。"
+  "final": "用 3–5 句话说说你的一天。",
+  "audio": {
+    "起床": "audio/lesson-01/01.m4a",
+    "上班": "audio/lesson-01/02.m4a",
+    "下班": "audio/lesson-01/03.m4a",
+    "回家": "audio/lesson-01/04.m4a",
+    "做饭": "audio/lesson-01/05.m4a",
+    "看书": "audio/lesson-01/06.m4a",
+    "睡觉": "audio/lesson-01/07.m4a",
+    "左右": "audio/lesson-01/08.m4a",
+    "我七点左右起床。": "audio/lesson-01/09.m4a",
+    "我八点半上班。": "audio/lesson-01/10.m4a",
+    "我下午六点下班。": "audio/lesson-01/11.m4a",
+    "下班以后，我回家。": "audio/lesson-01/12.m4a",
+    "回家以后，我做饭。": "audio/lesson-01/13.m4a",
+    "我先做饭，再看书。": "audio/lesson-01/14.m4a",
+    "我一般十一点左右睡觉。": "audio/lesson-01/15.m4a"
+},
+  "listening": {
+    "slowUrl": "https://www.youtube.com/watch?v=spUDn47rrzE&list=PLPXlnPJE-lcg&index=14",
+    "naturalUrl": "https://www.youtube.com/watch?v=V8xZn2QKY2s"
+}
 };
