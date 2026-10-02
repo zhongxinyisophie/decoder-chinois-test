@@ -66,7 +66,7 @@ window.DECODER_LESSONS[2] = {
       "rester chez soi"
     ],
     [
-      "周末干吗？",
+      "周末干嘛？",
       "Tu fais quoi ce week-end ?"
     ]
   ],
@@ -156,10 +156,16 @@ window.DECODER_LESSONS[2] = {
     "我周末跟朋友一起喝咖啡。": "audio/lesson-02/12.m4a",
     "这个星期天一起去公园吧。": "audio/lesson-02/13.m4a",
     "周末我一般九点左右起床。": "audio/lesson-02/14.m4a",
-    "周末我先运动，再跟朋友一起喝咖啡。": "audio/lesson-02/15.m4a"
-},
+    "周末我先运动，再跟朋友一起喝咖啡。": "audio/lesson-02/15.m4a",
+    "睡懒觉": "audio/lesson-02/supplement-01.m4a",
+    "出去吃饭": "audio/lesson-02/supplement-02.m4a",
+    "逛逛": "audio/lesson-02/supplement-03.m4a",
+    "喝杯咖啡": "audio/lesson-02/supplement-04.m4a",
+    "在家待着": "audio/lesson-02/supplement-05.m4a",
+    "周末干嘛？": "audio/lesson-02/supplement-06.m4a"
+  },
   "listening": {
     "slowUrl": "https://www.youtube.com/watch?v=4pbPsfeQL58&list=PLPXlnPJE-lcg&index=12",
     "naturalUrl": "https://www.youtube.com/watch?v=2hcQPCFRt6M&list=PLPXlnPJE-lcg&index=11"
-}
+  }
 };

@@ -163,10 +163,18 @@ window.DECODER_LESSONS[1] = {
     "下班以后，我回家。": "audio/lesson-01/12.m4a",
     "回家以后，我做饭。": "audio/lesson-01/13.m4a",
     "我先做饭，再看书。": "audio/lesson-01/14.m4a",
-    "我一般十一点左右睡觉。": "audio/lesson-01/15.m4a"
-},
+    "我一般十一点左右睡觉。": "audio/lesson-01/15.m4a",
+    "吃饭": "audio/lesson-01/supplement-01.m4a",
+    "早饭": "audio/lesson-01/supplement-02.m4a",
+    "晚饭": "audio/lesson-01/supplement-03.m4a",
+    "上午": "audio/lesson-01/supplement-04.m4a",
+    "下午": "audio/lesson-01/supplement-05.m4a",
+    "看电影": "audio/lesson-01/supplement-06.m4a",
+    "看电视": "audio/lesson-01/supplement-07.m4a",
+    "在家": "audio/lesson-01/supplement-08.m4a"
+  },
   "listening": {
     "slowUrl": "https://www.youtube.com/watch?v=spUDn47rrzE&list=PLPXlnPJE-lcg&index=14",
     "naturalUrl": "https://www.youtube.com/watch?v=V8xZn2QKY2s"
-}
+  }
 };
