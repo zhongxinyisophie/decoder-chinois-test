@@ -638,5 +638,359 @@
     "sourceStart": 96.93,
     "sourceEnd": 107.89,
     "sha256": "c32e0fef85a9eeec637a3c82002d6e1a38643463de1ce1fa38d463eba895ebd5"
+  },
+  {
+    "lesson": 1,
+    "text": "吃饭",
+    "file": "audio/lesson-01/supplement-01.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 1.449,
+    "sourceEnd": 3.017,
+    "sha256": "8bf33b69d3ff3c3bdf12cce8ff8c3aa25233d41cc5197e16a1f919f1944817b5"
+  },
+  {
+    "lesson": 1,
+    "text": "早饭",
+    "file": "audio/lesson-01/supplement-02.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 4.822,
+    "sourceEnd": 6.431,
+    "sha256": "fa645825ea6c5bb3dda60b4b57c780da546eedbdaddcf300620fa2b3dae2858d"
+  },
+  {
+    "lesson": 1,
+    "text": "晚饭",
+    "file": "audio/lesson-01/supplement-03.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 7.681,
+    "sourceEnd": 9.268,
+    "sha256": "ac7728c24bf27518e42df8c980d3e4b5256ef1101f4fc2a489b8f6148b64937d"
+  },
+  {
+    "lesson": 1,
+    "text": "上午",
+    "file": "audio/lesson-01/supplement-04.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 10.913,
+    "sourceEnd": 12.819,
+    "sha256": "6643c63cdd00a0e923fd48220df539c46f28e54f94943f7bf3e8d87de7466105"
+  },
+  {
+    "lesson": 1,
+    "text": "下午",
+    "file": "audio/lesson-01/supplement-05.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 14.089,
+    "sourceEnd": 16.032,
+    "sha256": "1285f1ef95b6ca85815349e83e68d8f3e2a446f5bf48241f848db721865a0ff6"
+  },
+  {
+    "lesson": 1,
+    "text": "看电影",
+    "file": "audio/lesson-01/supplement-06.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 17.589,
+    "sourceEnd": 19.598,
+    "sha256": "b64a85007e61523fb09ee717af7f3f80525d348c45526f9e26217637d8602942"
+  },
+  {
+    "lesson": 1,
+    "text": "看电视",
+    "file": "audio/lesson-01/supplement-07.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 21.798,
+    "sourceEnd": 23.881,
+    "sha256": "b6f9928115dca7bbb4a6be3ce57b9de334fc581772d60d8362a251ac39a6d095"
+  },
+  {
+    "lesson": 1,
+    "text": "在家",
+    "file": "audio/lesson-01/supplement-08.m4a",
+    "source": "第1课补录.m4a",
+    "sourceStart": 26.243,
+    "sourceEnd": 27.996,
+    "sha256": "099c364b3df0368bcb9488e71505ebf40ad42d3103c8e1434642316df42a226c"
+  },
+  {
+    "lesson": 2,
+    "text": "睡懒觉",
+    "file": "audio/lesson-02/supplement-01.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 0.934,
+    "sourceEnd": 2.968,
+    "sha256": "e60541edd871c53504d14a1b6cc2d335f8723cd5f6a98889bbf43621eccb27c6"
+  },
+  {
+    "lesson": 2,
+    "text": "出去吃饭",
+    "file": "audio/lesson-02/supplement-02.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 4.859,
+    "sourceEnd": 7.148,
+    "sha256": "0148dd3274b34a6e8e2a3fd27b174c3bc2d1a88832f422f7468e7b5ce89423f3"
+  },
+  {
+    "lesson": 2,
+    "text": "逛逛",
+    "file": "audio/lesson-02/supplement-03.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 8.852,
+    "sourceEnd": 10.288,
+    "sha256": "7faa0e1f8b1e11c9015b818e4a18008ab1e45c7e8d9e59007afc08369b181271"
+  },
+  {
+    "lesson": 2,
+    "text": "喝杯咖啡",
+    "file": "audio/lesson-02/supplement-04.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 11.874,
+    "sourceEnd": 14.022,
+    "sha256": "a31b7d0c4a4a2695bac194974cf0d64b9755f6c60df31290eafc808b6b57de77"
+  },
+  {
+    "lesson": 2,
+    "text": "在家待着",
+    "file": "audio/lesson-02/supplement-05.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 15.606,
+    "sourceEnd": 17.655,
+    "sha256": "b34c62b47e191c911d9865d745cdc73819953aeeac3650c047ddf1ef5bcdc340"
+  },
+  {
+    "lesson": 2,
+    "text": "周末干嘛？",
+    "file": "audio/lesson-02/supplement-06.m4a",
+    "source": "第2课补录.m4a",
+    "sourceStart": 19.737,
+    "sourceEnd": 21.76,
+    "sha256": "29a08000d922923c9d58c0b06da8f5ba1037fcecaa772bf361e5fd21bb93a49b"
+  },
+  {
+    "lesson": 3,
+    "text": "扫码",
+    "file": "audio/lesson-03/supplement-01.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 1.415,
+    "sourceEnd": 3.284,
+    "sha256": "8cda048f96d9f8f2256850fa3f8b2501c3ae075035820e8d1f7d43e940f408ce"
+  },
+  {
+    "lesson": 3,
+    "text": "川菜馆",
+    "file": "audio/lesson-03/supplement-02.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 4.661,
+    "sourceEnd": 6.928,
+    "sha256": "c36b3edb20b34b714cc3bedfdf1f5e3bf4f9bec3f03afc9c7148af243930b0d4"
+  },
+  {
+    "lesson": 3,
+    "text": "能吃辣",
+    "file": "audio/lesson-03/supplement-03.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 8.545,
+    "sourceEnd": 10.49,
+    "sha256": "ed0074f30121c07eb8ab856ddf6f3f0f2f7a1da8313880cc46cfb4fe34c9198a"
+  },
+  {
+    "lesson": 3,
+    "text": "微辣",
+    "file": "audio/lesson-03/supplement-04.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 12.354,
+    "sourceEnd": 13.8,
+    "sha256": "537ec521065e962a3035f6a60d31b55c551ba62fb2a566257532baae0f72fd33"
+  },
+  {
+    "lesson": 3,
+    "text": "不要香菜",
+    "file": "audio/lesson-03/supplement-05.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 15.582,
+    "sourceEnd": 17.754,
+    "sha256": "9e4118fed78e2472e574626a42b073b1f9ffaba43d0db2fff56c1d648a23adf6"
+  },
+  {
+    "lesson": 3,
+    "text": "番茄炒蛋",
+    "file": "audio/lesson-03/supplement-06.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 19.496,
+    "sourceEnd": 21.958,
+    "sha256": "9551ca93671fedefbd44eea1fd0f8b73413528f32cad62fa30d1b4e431fa3c12"
+  },
+  {
+    "lesson": 3,
+    "text": "宫保鸡丁",
+    "file": "audio/lesson-03/supplement-07.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 23.794,
+    "sourceEnd": 26.382,
+    "sha256": "0c37bbd45cec33c92717d7a540418d469dbc4baa47e23ef9d74005143fa5c267"
+  },
+  {
+    "lesson": 3,
+    "text": "青菜",
+    "file": "audio/lesson-03/supplement-08.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 27.988,
+    "sourceEnd": 29.783,
+    "sha256": "de678fe5fc478b55d31090d4eb7cea0eba6eee2753edb2a1d146e771c1b3c66c"
+  },
+  {
+    "lesson": 3,
+    "text": "米饭",
+    "file": "audio/lesson-03/supplement-09.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 31.234,
+    "sourceEnd": 32.845,
+    "sha256": "5bbbe58f89c23d3cb8c06650df4cfc706ef2cdc00212ac7a0fd4af639aa912a3"
+  },
+  {
+    "lesson": 3,
+    "text": "一壶茶",
+    "file": "audio/lesson-03/supplement-10.m4a",
+    "source": "第3课补录.m4a",
+    "sourceStart": 34.292,
+    "sourceEnd": 36.422,
+    "sha256": "25f29ae024553260f451e9e84fe64d41bb58cde1c4111da1a467241fa48fda98"
+  },
+  {
+    "lesson": 4,
+    "text": "有小一点的吗？",
+    "file": "audio/lesson-04/supplement-01.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 0.663,
+    "sourceEnd": 3.203,
+    "sha256": "4be3fb0ded86e457eed68e300c0e1b34656e13a20bfd492c4ef77f9e4d73fc0f"
+  },
+  {
+    "lesson": 4,
+    "text": "试衣间在哪儿？",
+    "file": "audio/lesson-04/supplement-02.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 4.691,
+    "sourceEnd": 6.949,
+    "sha256": "bf0b5406557194adbd886dd999b74a3a6af469860f02f443f1656fd4d0dcea4f"
+  },
+  {
+    "lesson": 4,
+    "text": "一件衣服",
+    "file": "audio/lesson-04/supplement-03.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 8.769,
+    "sourceEnd": 10.814,
+    "sha256": "2a49aa19ec777e6242df20b8c4062a5cc2c53d123746aabfc48fd263161f879b"
+  },
+  {
+    "lesson": 4,
+    "text": "打折",
+    "file": "audio/lesson-04/supplement-04.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 12.58,
+    "sourceEnd": 14.143,
+    "sha256": "5f9c8ae012925e27163841d550ec55df50420816ef3bb066d97fef5e5b8270d7"
+  },
+  {
+    "lesson": 4,
+    "text": "九折",
+    "file": "audio/lesson-04/supplement-05.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 16.143,
+    "sourceEnd": 17.845,
+    "sha256": "6194441792e651983b7c783dd4326b66c21e831254451c3bca3d2f9a8a278d77"
+  },
+  {
+    "lesson": 4,
+    "text": "可以退吗？",
+    "file": "audio/lesson-04/supplement-06.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 19.644,
+    "sourceEnd": 21.489,
+    "sha256": "9345ec657272936eec5994ea24d0de819cc136a2688a2e2810d470c0a3cc24a1"
+  },
+  {
+    "lesson": 4,
+    "text": "可以换吗？",
+    "file": "audio/lesson-04/supplement-07.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 23.314,
+    "sourceEnd": 25.172,
+    "sha256": "1da5173ede09b61c6aecd13543b76dbccfb04f1c3bc330405ae45ac44c07c163"
+  },
+  {
+    "lesson": 4,
+    "text": "可以刷卡吗？",
+    "file": "audio/lesson-04/supplement-08.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 27.162,
+    "sourceEnd": 29.468,
+    "sha256": "cdc090b1f0657db25a2a860be3e4510ce06d0567ec08696dfd1dd9f079174d12"
+  },
+  {
+    "lesson": 4,
+    "text": "可以用支付宝吗？",
+    "file": "audio/lesson-04/supplement-09.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 31.422,
+    "sourceEnd": 34.539,
+    "sha256": "2120958383b69ba63a60519a9c278f9fe3125920c3496f342bba03f19e8e4fc2"
+  },
+  {
+    "lesson": 4,
+    "text": "可以用微信吗？",
+    "file": "audio/lesson-04/supplement-10.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 36.646,
+    "sourceEnd": 39.82,
+    "sha256": "fa839f71e5db9ba1824b03ff4f25641879a40dd943a4314081c64322fbffccdb"
+  },
+  {
+    "lesson": 4,
+    "text": "小码",
+    "file": "audio/lesson-04/supplement-11.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 42.324,
+    "sourceEnd": 43.876,
+    "sha256": "484c6978e49d5142de8be796ac58c38e327618b446ac9e5fc2c3d00c5b536256"
+  },
+  {
+    "lesson": 4,
+    "text": "中码",
+    "file": "audio/lesson-04/supplement-12.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 44.926,
+    "sourceEnd": 46.337,
+    "sha256": "92eaddefff5952b481ac67e08120483bbfe7cf34e02ed5c97177210f4c4eff66"
+  },
+  {
+    "lesson": 4,
+    "text": "大码",
+    "file": "audio/lesson-04/supplement-13.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 47.289,
+    "sourceEnd": 48.673,
+    "sha256": "c93a5dc9e203e3b6ac10d05613b43e66f4b93b8f4e10a3f810b88f5643827e4f"
+  },
+  {
+    "lesson": 4,
+    "text": "能便宜一点吗？",
+    "file": "audio/lesson-04/supplement-14.m4a",
+    "source": "第4课补录.m4a",
+    "sourceStart": 51.043,
+    "sourceEnd": 53.593,
+    "sha256": "972d1e433d5dfe6b95652136f24b3fe36c8c7635ba069419e8baa269f2e06fd5"
+  },
+  {
+    "lesson": 4,
+    "text": "小码/中码/大码",
+    "file": "audio/lesson-04/supplement-sizes.m4a",
+    "source": "第4课补录.m4a",
+    "components": [
+      "audio/lesson-04/supplement-11.m4a",
+      "audio/lesson-04/supplement-12.m4a",
+      "audio/lesson-04/supplement-13.m4a"
+    ],
+    "sha256": "44ffeb2a4c2bee6b0d423494c57841c4329127fba4a80b85486b2bc30d32da4a"
   }
 ]
