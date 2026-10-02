@@ -1,5 +1,7 @@
 
 :root{--bg:#f6f7f8;--card:#fff;--text:#1f2937;--muted:#6b7280;--border:#e5e7eb;--accent:#111827;--soft:#eef2ff;--success:#ecfdf5}
+button:disabled{opacity:.5;cursor:default}button:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #6366f1;outline-offset:3px}
+.focus-card{max-width:640px;margin:auto}.focus-text{text-align:center;line-height:1.5;padding:22px 0;overflow-wrap:anywhere}.focus-hint{color:var(--muted);font-size:15px}.focus-hint summary{cursor:pointer;min-height:44px;padding:10px 0}.focus-navigation{display:grid;grid-template-columns:1fr 1.4fr}.focus-item .row{display:grid;grid-template-columns:1fr 1fr}.focus-item .student-status{min-height:42px}
 *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI","PingFang SC","Noto Sans CJK SC",sans-serif}
 .wrap{max-width:900px;margin:auto;padding:16px}.stack{display:grid;gap:14px}.row,.between{display:flex;gap:10px;align-items:center;flex-wrap:wrap}.between{justify-content:space-between}
 .card{background:#fff;border:1px solid var(--border);border-radius:16px;padding:18px}.hero{padding:22px}.notice{background:#f9fafb;border:1px solid var(--border);border-radius:12px;padding:12px}.success{background:var(--success);border:1px solid #bbf7d0;border-radius:12px;padding:12px}
@@ -167,3 +169,9 @@ textarea{min-height:95px}
  .recording-actions .btn{width:100%}
  .recording-title{font-size:22px}
 }
+/* Focus practice: keep navigation and long bilingual labels within mobile width. */
+.focus-navigation{display:grid;grid-template-columns:1fr 1.4fr}
+.focus-navigation .btn{width:100%;min-width:0;overflow-wrap:anywhere}
+.focus-item .row{display:grid;grid-template-columns:1fr 1fr}
+.between .right{flex:1;min-width:0;overflow-wrap:anywhere}
+.focus-card{width:100%;min-width:0}

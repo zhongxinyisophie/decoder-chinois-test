@@ -7,6 +7,8 @@
  document.title=D.title+' · Décoder le chinois';
  $('title').textContent=D.title;$('subtitle').textContent=D.fr;
  let i=0,py=0,spoken=0,hanzi=0;
+ const checked=new Map();
+ function result(ok,text){const r=checked.get(i)||{text,attempts:0,first:false,solved:false};if(r.solved)return;r.attempts++;r.first=r.attempts===1&&ok;r.solved=ok;checked.set(i,r);}
  const shuffle=items=>{const out=[...items];for(let j=out.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[out[j],out[k]]=[out[k],out[j]];}return out;};
  const words=shuffle(D.active);
  const quickPool=shuffle(D.quick);
@@ -29,20 +31,20 @@
   const opts=[w,...D.active.filter(x=>x[0]!==w[0]).slice(0,2)].sort(()=>Math.random()-.5);
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Écoute</div><div class="task-title">Quel mot entends-tu ?</div><div class="task-help">N’affiche le pinyin que si tu en as besoin.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="grid3">${opts.map(x=>`<button class="choice choice-hanzi opt" data-x="${x[0]}">${x[0]}</button>`).join('')}</div><div id="fb"></div><div id="rev" class="hidden notice answer-reveal"><div class="answer-hanzi">${w[0]}</div><div class="answer-meaning">${w[2]}</div><div class="pinyin-wrap"><button id="pbtn" class="btn link">Afficher le pinyin</button><div id="pt" class="hidden pinyin-text">${w[1]}</div></div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
   $('play').onclick=()=>Decoder.say(w[0],.9);
-  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[0];$('fb').textContent=ok?'Bien.':'Réécoute.';if(ok){$('rev').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[0];result(ok,w[0]);$('fb').textContent=ok?'Bien.':'Réécoute.';if(ok){$('rev').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
   $('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function meaning(w){
   const opts=[w[2],...D.active.filter(x=>x[0]!==w[0]).slice(0,2).map(x=>x[2])].sort(()=>Math.random()-.5);
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Lis les caractères</div><div class="task-title">Que veut dire ce mot ?</div></div><div class="bigcn center">${w[0]}</div><div class="grid3">${opts.map(x=>`<button class="choice choice-meaning opt" data-x="${x}">${x}</button>`).join('')}</div><div id="fb"></div><div id="after" class="hidden notice answer-reveal"><div class="pronunciation-check"><div class="instruction">Prononce-le d’abord toi-même, puis écoute le modèle.</div><button id="check" class="btn verify-btn">▶ Écouter le modèle</button><div class="pinyin-section"><button id="pbtn" class="btn link pinyin-toggle">Afficher le pinyin</button><div id="pt" class="hidden pinyin-text">${w[1]}</div></div></div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
-  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[2];$('fb').textContent=ok?'Oui. Tu l’as reconnu sans pinyin.':'Réessaie.';if(ok){$('after').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[2];result(ok,w[0]);$('fb').textContent=ok?'Oui. Tu l’as reconnu sans pinyin.':'Réessaie.';if(ok){$('after').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
   $('check').onclick=()=>Decoder.say(w[0]);$('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function segment(){
   const [s,ch]=D.segment,sh=[...ch].sort(()=>Math.random()-.5);let chosen=[];
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Écoute la phrase</div><div class="task-title">Remets les groupes dans l’ordre.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="row">${sh.map(x=>`<button class="chip c" data-x="${x}">${x}</button>`).join('')}</div><div class="notice"><div id="ans" class="row"></div></div><div id="fb"></div><div class="row"><button id="rst" class="btn">Recommencer</button><button id="n" class="btn primary" disabled>Continuer</button></div></div>`;
   $('play').onclick=()=>Decoder.say(s,.88);
-  function dr(){$('ans').innerHTML=chosen.map(x=>`<span class="pill">${x}</span>`).join('');if(chosen.length===ch.length){const ok=chosen.every((x,j)=>x===ch[j]);$('fb').textContent=ok?'Très bien.':'L’ordre n’est pas correct.';$('n').disabled=!ok;}}
+  function dr(){$('ans').innerHTML=chosen.map(x=>`<span class="pill">${x}</span>`).join('');if(chosen.length===ch.length){const ok=chosen.every((x,j)=>x===ch[j]);result(ok,s);$('fb').textContent=ok?'Très bien.':'L’ordre n’est pas correct.';$('n').disabled=!ok;}}
   document.querySelectorAll('.c').forEach(b=>b.onclick=()=>{if(!chosen.includes(b.dataset.x)){chosen.push(b.dataset.x);dr();}});
   $('rst').onclick=()=>{chosen=[];$('n').disabled=true;$('fb').textContent='';dr();};$('n').onclick=next;
  }
@@ -88,6 +90,7 @@
   };
 
   async function start(){
+   $('n').disabled=true;
    try{
     const stream=await navigator.mediaDevices.getUserMedia({audio:true});
     const chunks=[];
@@ -102,7 +105,7 @@
      const blob=new Blob(chunks,{type:actualMime});
      const url=URL.createObjectURL(blob);
      stream.getTracks().forEach(x=>x.stop());
-     spoken++;
+     $('n').disabled=false;spoken++;
      showReview(blob,url,info);
     };
 
@@ -111,6 +114,7 @@
     const timer=setInterval(()=>{seconds++;const m=Math.floor(seconds/60),s=String(seconds%60).padStart(2,'0');if($('timer'))$('timer').textContent=m+':'+s;},1000);
     $('stop').onclick=()=>{clearInterval(timer);mr.stop();};
    }catch(e){
+    $('n').disabled=false;
     h.innerHTML='<div class="notice small">Autorisation micro refusée ou indisponible. Vérifie l’autorisation du micro dans ton navigateur, puis réessaie.</div><button id="retryRec" class="btn">Réessayer</button>';
     $('retryRec').onclick=idle;
    }
@@ -158,8 +162,10 @@
   idle();
  }
  function done(){
-  $('bar').style.width='100%';$('count').textContent='Terminé';
-  $('host').innerHTML=`<div class="card stack"><div class="title">C’est tout pour aujourd’hui ✓</div><div class="grid3"><div class="notice">Caractères<br><b>${hanzi}</b></div><div class="notice">Oral<br><b>${spoken}</b></div><div class="notice">Pinyin<br><b>${py}</b></div></div><div class="grid2"><a class="btn" href="index.html">Accueil</a><a class="btn primary" href="feedback.html">Donner mon avis</a></div></div>`;
+  $('bar').style.width='100%';$('count').textContent='本轮结束 · Terminé';
+  const answers=[...checked.values()],first=answers.filter(r=>r.first),retried=answers.filter(r=>r.attempts>1);
+  $('host').innerHTML=`<div class="card stack"><div class="title">这一轮完成了 ✓<br>Ta séance est terminée.</div><div class="success">首次答对 · Réussis au premier essai : <b>${first.length} / ${answers.length}</b><p>${first.map(r=>r.text).join(' · ')||'这次没有首次答对的条目。Aucun premier essai réussi cette fois.'}</p></div>${retried.length?`<div class="notice"><b>下次可以再练 · À reprendre</b><p>${retried.map(r=>r.text).join(' · ')}</p></div>`:''}<div class="small">只统计选择和排序的答案，不给口语自动评分。Seules les réponses aux choix et à la remise en ordre sont évaluées. L’oral n’est pas noté automatiquement.</div><div class="grid2"><button id="doneFocus" class="btn primary">接着练跟读 · Pratiquer à voix haute</button><a class="btn" href="index.html">返回首页 · Accueil</a></div></div>`;
+  $('doneFocus').onclick=()=>DecoderFocus.start(D,id);
  }
  function library(){
   if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();
@@ -178,5 +184,7 @@
  }
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};
  $('libraryBtn').onclick=library;
+ $('focusBtn').onclick=()=>DecoderFocus.start(D,id);
+ if(Decoder.getParam('mode')==='focus')DecoderFocus.start(D,id);
 })();
 

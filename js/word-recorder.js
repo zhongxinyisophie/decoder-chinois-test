@@ -1,6 +1,6 @@
 /* Local, temporary student recordings. No upload or speech scoring. */
 window.DecoderWordRecorder = (() => {
- let items=[],teachers=[],owner=null,stream=null,recorder=null,playback=null,generation=0;
+ let items=[],teachers=[],owner=null,stream=null,recorder=null,playback=null,generation=0,options={};
  const stopPlayback=()=>{if(playback){playback.pause();playback=null;}};
  const release=()=>{if(stream)stream.getTracks().forEach(t=>t.stop());stream=null;};
  function cleanup(){
@@ -9,9 +9,9 @@ window.DecoderWordRecorder = (() => {
   recorder=null;release();owner=null;
   items.forEach(x=>{if(x.url)URL.revokeObjectURL(x.url);});items=[];teachers.forEach(b=>b.disabled=false);teachers=[];
  }
- function controls(){items.forEach(x=>{x.record.disabled=!!owner&&owner!==x;x.listen.disabled=!!owner||!x.url;});teachers.forEach(b=>b.disabled=!!owner);}
- function mount(root){
-  cleanup();
+ function controls(){if(options.onBusy)options.onBusy(!!owner);items.forEach(x=>{x.record.disabled=!!owner&&owner!==x;x.listen.disabled=!!owner||!x.url;});teachers.forEach(b=>b.disabled=!!owner);}
+ function mount(root,opts={}){
+  cleanup();options=opts;
   teachers=[...root.querySelectorAll('.p')];
   const supported=!!(navigator.mediaDevices&&navigator.mediaDevices.getUserMedia&&window.MediaRecorder);
   root.querySelectorAll('[data-student-recording]').forEach(card=>{
@@ -47,6 +47,7 @@ window.DecoderWordRecorder = (() => {
       const blob=new Blob(chunks,{type:current.mimeType||'audio/webm'});reset();
       if(!blob.size){x.status.textContent='没有录到声音，请重试。Aucun son enregistré. Réessaie.';return;}
       if(x.url)URL.revokeObjectURL(x.url);x.url=URL.createObjectURL(blob);controls();
+      if(options.onRecorded)options.onRecorded(text);
       x.status.textContent='可以听自己，再听老师作比较。Écoute-toi, puis réécoute le modèle pour comparer.';
      };
      current.start();x.record.disabled=false;x.record.textContent='■ 停止 · Arrêter';x.record.setAttribute('aria-label','停止录音：'+text+' · Arrêter : '+text);x.status.textContent='正在录音，说完后点击停止。Enregistrement en cours : appuie sur Arrêter quand tu as fini.';
@@ -54,7 +55,7 @@ window.DecoderWordRecorder = (() => {
    };
    x.listen.onclick=()=>{
     stopPlayback();Decoder.stopAudio();const a=new Audio(x.url);playback=a;
-    a.onended=()=>{if(playback===a)playback=null;};
+    a.onended=()=>{if(playback===a)playback=null;if(options.onListened)options.onListened(text);};
     a.onerror=()=>{x.status.textContent='回听失败，请重新录音。Lecture impossible : réenregistre-toi.';};
     a.play().catch(()=>{x.status.textContent='回听失败，请重试。Lecture impossible : réessaie.';});
    };
@@ -64,5 +65,5 @@ window.DecoderWordRecorder = (() => {
  }
  document.addEventListener('click',e=>{if(e.target.closest('.p')){stopPlayback();if(owner)e.stopImmediatePropagation();}},true);
  window.addEventListener('pagehide',cleanup);
- return {mount,cleanup};
+ return {mount,cleanup,stopPlayback};
 })();
