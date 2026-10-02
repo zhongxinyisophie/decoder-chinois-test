@@ -59,7 +59,7 @@ window.DecoderWordRecorder = (() => {
     a.play().catch(()=>{x.status.textContent='回听失败，请重试。Lecture impossible : réessaie.';});
    };
   });
-  const note=document.createElement('details');note.className='notice small';const help='第一课录音对比试用：先听老师，再录自己并回听。录音仅在本页临时保留，不上传；重录替换上一条，刷新或离开后清除。Essai en leçon 1 : écoute le modèle, enregistre-toi puis compare. Tes enregistrements restent temporairement sur cette page, sans envoi ; ils sont remplacés si tu réenregistres et effacés quand tu quittes ou actualises la page.';
+  const note=document.createElement('details');note.className='notice small';const help='录音对比：先听老师，再录自己并回听。录音仅在本页临时保留，不上传；重录替换上一条，刷新或离开后清除。Pour comparer : écoute le modèle, enregistre-toi puis compare. Tes enregistrements restent temporairement sur cette page, sans envoi ; ils sont remplacés si tu réenregistres et effacés quand tu quittes ou actualises la page.';
   note.innerHTML='<summary><b>录音对比：使用说明 · Mode d’emploi</b></summary>';const info=document.createElement('div');info.textContent=help;note.append(info);root.prepend(note);
  }
  document.addEventListener('click',e=>{if(e.target.closest('.p')){stopPlayback();if(owner)e.stopImmediatePropagation();}},true);
