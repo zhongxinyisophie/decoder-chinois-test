@@ -164,5 +164,9 @@ window.DECODER_LESSONS[1] = {
     "回家以后，我做饭。": "audio/lesson-01/13.m4a",
     "我先做饭，再看书。": "audio/lesson-01/14.m4a",
     "我一般十一点左右睡觉。": "audio/lesson-01/15.m4a"
+},
+  "listening": {
+    "slowUrl": "https://www.youtube.com/watch?v=spUDn47rrzE&list=PLPXlnPJE-lcg&index=14",
+    "naturalUrl": "https://www.youtube.com/watch?v=V8xZn2QKY2s"
 }
 };

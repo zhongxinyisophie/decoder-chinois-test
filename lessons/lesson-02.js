@@ -157,5 +157,9 @@ window.DECODER_LESSONS[2] = {
     "这个星期天一起去公园吧。": "audio/lesson-02/13.m4a",
     "周末我一般九点左右起床。": "audio/lesson-02/14.m4a",
     "周末我先运动，再跟朋友一起喝咖啡。": "audio/lesson-02/15.m4a"
+},
+  "listening": {
+    "slowUrl": "https://www.youtube.com/watch?v=4pbPsfeQL58&list=PLPXlnPJE-lcg&index=12",
+    "naturalUrl": "https://www.youtube.com/watch?v=2hcQPCFRt6M&list=PLPXlnPJE-lcg&index=11"
 }
 };

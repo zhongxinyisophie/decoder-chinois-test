@@ -90,5 +90,9 @@ window.DECODER_LESSONS[3] = {
     "先这些，谢谢。": "audio/lesson-03/22.m4a",
     "最后还有一点菜没吃完，所以我们就打包带回家了。": "audio/lesson-03/23.m4a",
     "我朋友很能吃辣，但是我不太能吃辣。": "audio/lesson-03/24.m4a"
+},
+  "listening": {
+    "slowUrl": "https://www.youtube.com/watch?v=7dzG4r02LTM&list=PLPXlnPJE-lcg&index=10",
+    "naturalUrl": "https://www.youtube.com/watch?v=kKU9H-1DBZo&list=PLPXlnPJE-lcg&index=9"
 }
 };
