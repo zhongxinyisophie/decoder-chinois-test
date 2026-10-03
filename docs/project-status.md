@@ -269,3 +269,10 @@ js/feedback-config.js 配置用户指定接收邮箱 zhongxinyisophie@gmail.com�
 
 ## 反馈页发布授权
 用户已验收本地反馈页并明确授权发布。将简短问卷、邮件与聊天发送备用流程、结束页反馈入口发布到main；不提供服务器提交回执，不改变Pages设置。部署结果随后核对。
+
+
+## 反馈页已发布（2026-10-03）
+
+用户验收并授权发布。功能提交1f559c52d5d5036eb72023e6488b4bde919e0cfd；GitHub Pages运行37117116677完成且success：https://github.com/zhongxinyisophie/decoder-chinois-test/actions/runs/37117116677 。前述未发布为历史状态，现新版反馈页及练习结束反馈入口已上线。
+
+线上核对第四课预选、必填问卷生成、复制成功仍提示尚未发送、mailto收件人为zhongxinyisophie@gmail.com，控制台无错误；375px截图已保存。此次未发送测试邮件，也未打开系统邮件应用或系统分享；真实手机发送并确认收件仍待教师完成。网站继续无服务端提交回执，发送依赖邮件/聊天应用。课程与音频未改，Pages设置未改。
