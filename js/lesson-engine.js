@@ -8,7 +8,10 @@
  $('title').textContent=D.title;$('subtitle').textContent=D.fr;
  let i=0,py=0,spoken=0,hanzi=0;
  const checked=new Map();
- function result(ok,text){const r=checked.get(i)||{text,attempts:0,first:false,solved:false};if(r.solved)return;r.attempts++;r.first=r.attempts===1&&ok;r.solved=ok;checked.set(i,r);}
+ function reviewId(){const t=tasks[i];return t.t==='segment'?`segment:${id}`:`${t.t}:${id}:${t.w[0]}`;}
+ function storageResult(ok){if(!ok){let note=$('lessonStorageNotice');if(!note){note=document.createElement('div');note.id='lessonStorageNotice';note.className='notice small';note.setAttribute('role','status');$('session').prepend(note);}note.textContent='L’historique ne peut pas être sauvegardé ; tu peux continuer.';}}
+ function result(ok,text){const r=checked.get(i)||{text,attempts:0,first:false,solved:false};if(r.solved)return;r.attempts++;r.first=r.attempts===1&&ok;r.solved=ok;checked.set(i,r);if(!ok)storageResult(DecoderReview.mistake(reviewId()));}
+
  const shuffle=items=>{const out=[...items];for(let j=out.length-1;j>0;j--){const k=Math.floor(Math.random()*(j+1));[out[j],out[k]]=[out[k],out[j]];}return out;};
  const words=shuffle(D.active);
  const quickPool=shuffle(D.quick);
@@ -21,23 +24,31 @@
   {t:'final'}
  ];
  if(D.listening) tasks.splice(5,0,{t:'fullListening'});
- function next(){i++;if(i>=tasks.length)done();else render()}
+ function next(){const r=checked.get(i);if(r&&r.solved)storageResult(DecoderReview.finish(reviewId(),r.first?0:r.attempts-1));Decoder.stopAudio();i++;if(i>=tasks.length)done();else render()}
  function render(){
   $('count').textContent=(i+1)+' / '+tasks.length;$('bar').style.width=((i+1)/tasks.length*100)+'%';
   const t=tasks[i];
   if(t.t==='listen')listen(t.w);else if(t.t==='meaning')meaning(t.w);else if(t.t==='segment')segment();else if(t.t==='reflex')reflex(t.r);else if(t.t==='quick')quick(t.q);else if(t.t==='fullListening')fullListening();else if(t.t==='final')finalTask();
  }
+ function compactAnswer(reveal){
+  const card=reveal.closest('.card');card.classList.add('task-answered');
+  const options=card.querySelector('.grid3');options.classList.add('answer-options');
+  if(card.querySelector('.choices-toggle'))return;
+  const toggle=document.createElement('button');toggle.type='button';toggle.className='btn link choices-toggle';toggle.textContent='Revoir les choix';toggle.setAttribute('aria-expanded','false');
+  toggle.onclick=()=>{const expanded=card.classList.toggle('show-answer-options');toggle.setAttribute('aria-expanded',String(expanded));toggle.textContent=expanded?'Masquer les choix':'Revoir les choix';};
+  const feedback=card.querySelector('#fb');feedback.classList.add('answer-feedback');feedback.append(toggle);
+ }
  function listen(w){
   const opts=[w,...D.active.filter(x=>x[0]!==w[0]).slice(0,2)].sort(()=>Math.random()-.5);
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Écoute</div><div class="task-title">Quel mot entends-tu ?</div><div class="task-help">N’affiche le pinyin que si tu en as besoin.</div></div><button id="play" class="btn soft">▶ Écouter</button><div class="grid3">${opts.map(x=>`<button class="choice choice-hanzi opt" data-x="${x[0]}">${x[0]}</button>`).join('')}</div><div id="fb"></div><div id="rev" class="hidden notice answer-reveal"><div class="answer-hanzi">${w[0]}</div><div class="answer-meaning">${w[2]}</div><div class="pinyin-wrap"><button id="pbtn" class="btn link">Afficher le pinyin</button><div id="pt" class="hidden pinyin-text">${w[1]}</div></div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
   $('play').onclick=()=>Decoder.say(w[0],.9);
-  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[0];result(ok,w[0]);$('fb').textContent=ok?'Bien.':'Réécoute.';if(ok){$('rev').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(checked.get(i)?.solved)return;const ok=b.dataset.x===w[0];result(ok,w[0]);$('fb').textContent=ok?'Bien.':'Réécoute.';if(ok){$('rev').classList.remove('hidden');compactAnswer($('rev'));$('n').disabled=false;hanzi++;}});
   $('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function meaning(w){
   const opts=[w[2],...D.active.filter(x=>x[0]!==w[0]).slice(0,2).map(x=>x[2])].sort(()=>Math.random()-.5);
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Lis les caractères</div><div class="task-title">Que veut dire ce mot ?</div></div><div class="bigcn center">${w[0]}</div><div class="grid3">${opts.map(x=>`<button class="choice choice-meaning opt" data-x="${x}">${x}</button>`).join('')}</div><div id="fb"></div><div id="after" class="hidden notice answer-reveal"><div class="pronunciation-check"><div class="instruction">Prononce-le d’abord toi-même, puis écoute le modèle.</div><button id="check" class="btn verify-btn">▶ Écouter le modèle</button><div class="pinyin-section"><button id="pbtn" class="btn link pinyin-toggle">Afficher le pinyin</button><div id="pt" class="hidden pinyin-text">${w[1]}</div></div></div></div><button id="n" class="btn primary" disabled>Continuer</button></div>`;
-  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{const ok=b.dataset.x===w[2];result(ok,w[0]);$('fb').textContent=ok?'Oui. Tu l’as reconnu sans pinyin.':'Réessaie.';if(ok){$('after').classList.remove('hidden');$('n').disabled=false;hanzi++;}});
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{if(checked.get(i)?.solved)return;const ok=b.dataset.x===w[2];result(ok,w[0]);$('fb').textContent=ok?'Oui. Tu l’as reconnu sans pinyin.':'Réessaie.';if(ok){$('after').classList.remove('hidden');compactAnswer($('after'));$('n').disabled=false;hanzi++;}});
   $('check').onclick=()=>Decoder.say(w[0]);$('pbtn').onclick=()=>{$('pt').classList.toggle('hidden');py++;};$('n').onclick=next;
  }
  function segment(){
@@ -60,7 +71,7 @@
  function fullListening(){
   const L=D.listening;
   const qs=shuffle(L.questions||[]).slice(0,2);
-  $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Compréhension orale</div><div class="task-title">${qs.length?"Écoute une version, puis réponds à voix haute.":"听一遍录音 · Écoute une version."}</div><div class="task-help">${qs.length?"Commence par la version lente si nécessaire. Ne lis la transcription qu’après.":"需要时先听慢速版，再听常速版。Commence par la version lente si nécessaire, puis écoute la version naturelle."}</div></div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${L.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${L.naturalUrl}">▶ Version naturelle</a></div>${qs.map(q=>`<div class="notice"><div class="bigcn" style="font-size:22px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}<button id="n" class="btn primary">${qs.length?'J’ai répondu · Continuer':'我听完了 · Continuer'}</button></div>`;
+  $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Compréhension orale</div><div class="task-title">${qs.length?"Écoute une version, puis réponds à voix haute.":"Écoute une version."}</div><div class="task-help">${qs.length?"Commence par la version lente si nécessaire. Ne lis la transcription qu’après.":"Commence par la version lente si nécessaire, puis écoute la version naturelle."}</div></div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${L.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${L.naturalUrl}">▶ Version naturelle</a></div>${qs.map(q=>`<div class="notice"><div class="bigcn" style="font-size:22px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}<button id="n" class="btn primary">${qs.length?'J’ai répondu · Continuer':'Continuer'}</button></div>`;
   $('n').onclick=next;
  }
  function finalTask(){
@@ -162,22 +173,22 @@
   idle();
  }
  function done(){
-  $('bar').style.width='100%';$('count').textContent='本轮结束 · Terminé';
+  $('bar').style.width='100%';$('count').textContent='Terminé';
   const answers=[...checked.values()],first=answers.filter(r=>r.first),retried=answers.filter(r=>r.attempts>1);
-  $('host').innerHTML=`<div class="card stack"><div class="title">这一轮完成了 ✓<br>Ta séance est terminée.</div><div class="success">首次答对 · Réussis au premier essai : <b>${first.length} / ${answers.length}</b><p>${first.map(r=>r.text).join(' · ')||'这次没有首次答对的条目。Aucun premier essai réussi cette fois.'}</p></div>${retried.length?`<div class="notice"><b>下次可以再练 · À reprendre</b><p>${retried.map(r=>r.text).join(' · ')}</p></div>`:''}<div class="small">只统计选择和排序的答案，不给口语自动评分。Seules les réponses aux choix et à la remise en ordre sont évaluées. L’oral n’est pas noté automatiquement.</div><div class="grid2"><button id="doneFocus" class="btn primary">接着练跟读 · Pratiquer à voix haute</button><a class="btn" href="index.html">返回首页 · Accueil</a><a class="btn" href="feedback.html?lesson=${id}">反馈体验 · Donner mon avis</a></div></div>`;
+  $('host').innerHTML=`<div class="card stack"><div class="title">Ta séance est terminée.</div><div class="success">Réussis au premier essai : <b>${first.length} / ${answers.length}</b><p>${first.map(r=>r.text).join(' · ')||'Aucun premier essai réussi cette fois.'}</p></div>${retried.length?`<div class="notice"><b>À reprendre</b><p>${retried.map(r=>r.text).join(' · ')}</p></div>`:''}<div class="small">Seules les réponses aux choix et à la remise en ordre sont évaluées. L’oral n’est pas noté automatiquement.</div><div class="grid2"><a class="btn" href="review.html">À revoir</a><button id="doneFocus" class="btn primary">Pratiquer à voix haute</button><a class="btn" href="index.html">Accueil</a><a class="btn" href="feedback.html?lesson=${id}">Donner mon avis</a></div></div>`;
   $('doneFocus').onclick=()=>DecoderFocus.start(D,id);
  }
  function library(){
   if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();
   $('library').classList.remove('hidden');$('session').classList.add('hidden');$('startCard').classList.add('hidden');
-  const wordAudio=text=>D.audio&&D.audio[text]?`<button class="btn soft p" data-s="${text}" aria-label="听真人录音：${text} · Écouter : ${text}">▶ 听录音 · Écouter</button>`:'<div class="small">真人录音待补充 · Enregistrement à venir</div>';
+  const wordAudio=text=>D.audio&&D.audio[text]?`<button class="btn soft p" data-s="${text}" aria-label="Écouter : ${text}">▶ Écouter</button>`:'<div class="small">Enregistrement à venir</div>';
   const activeHtml=D.active.map(w=>`<div class="notice stack" ${D.audio&&D.audio[w[0]]?`data-student-recording="${w[0]}"`:""}><div><b class="bigcn" style="font-size:20px">${w[0]}</b><div class="pinyin-text">${w[1]}</div><div class="small">${w[2]}</div></div>${wordAudio(w[0])}</div>`).join('');
   const recognitionHtml=D.recognition.map(w=>{const py=w.length>2?w[1]:'';const fr=w.length>2?w[2]:w[1];return `<div class="notice stack"><div><b class="bigcn" style="font-size:20px">${w[0]}</b>${py?`<div class="pinyin-text">${py}</div>`:''}<div class="small">${fr}</div></div>${wordAudio(w[0])}</div>`;}).join('');
   const phraseData=D.sentenceDetails||D.sentences.map(s=>[s,'','']);
-  const phrasesHtml=phraseData.map(s=>`<div class="notice stack" ${D.audio&&D.audio[s[0]]?`data-student-recording="${s[0]}"`:""}><div><div class="bigcn" style="font-size:21px">${s[0]}</div>${s[1]?`<div class="pinyin-text">${s[1]}</div>`:''}${s[2]?`<div class="small">${s[2]}</div>`:''}</div><button class="btn p" data-s="${s[0]}" aria-label="听老师：${s[0]} · Écouter le modèle : ${s[0]}">▶ 听老师 · Écouter le modèle</button></div>`).join('');
-  const blocksHtml=D.blocks?`<div class="card stack"><div class="h2">句子积木 · Construis ta phrase</div>${D.blocks.map(b=>`<div class="notice"><div class="small"><b>${b[0]}</b></div><div>${b[1]}</div><div class="bigcn" style="font-size:21px">${b[2]}</div><div class="pinyin-text">${b[3]}</div><div class="small">${b[4]}</div></div>`).join('')}</div>`:'';
+  const phrasesHtml=phraseData.map(s=>`<div class="notice stack" ${D.audio&&D.audio[s[0]]?`data-student-recording="${s[0]}"`:""}><div><div class="bigcn" style="font-size:21px">${s[0]}</div>${s[1]?`<div class="pinyin-text">${s[1]}</div>`:''}${s[2]?`<div class="small">${s[2]}</div>`:''}</div><button class="btn p" data-s="${s[0]}" aria-label="Écouter le modèle : ${s[0]}">▶ Écouter le modèle</button></div>`).join('');
+  const blocksHtml=D.blocks?`<div class="card stack"><div class="h2">Construis ta phrase</div>${D.blocks.map(b=>`<div class="notice"><div class="small"><b>${b[0]}</b></div><div>${b[1]}</div><div class="bigcn" style="font-size:21px">${b[2]}</div><div class="pinyin-text">${b[3]}</div><div class="small">${b[4]}</div></div>`).join('')}</div>`:'';
   const reflexHtml=D.reflex?`<div class="card stack"><div class="h2">🇫🇷 Réflexe francophone</div>${D.reflex.map(r=>`<div class="notice"><b>${r[0]}</b><div class="small">${r[1]}</div><div class="bigcn" style="font-size:20px;margin-top:6px">${r[2]}</div><div class="small" style="margin-top:6px">${r[3]}</div></div>`).join('')}</div>`:'';
-  const listeningHtml=D.listening?`<div class="card stack"><div class="h2">听力 · Compréhension orale</div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.naturalUrl}">▶ Version naturelle</a></div>${(D.listening.questions||[]).length?'<div class="h2">Questions</div>':''}${(D.listening.questions||[]).map(q=>`<div class="notice"><div class="bigcn" style="font-size:20px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}${(D.listening.script||[]).length?`<details class="notice"><summary><b>Voir la transcription après l’écoute</b></summary><div class="stack" style="margin-top:12px">${D.listening.script.map(x=>`<div><div class="bigcn" style="font-size:20px">${x[0]}</div><div class="pinyin-text">${x[1]}</div></div>`).join('')}</div><div class="small" style="margin-top:12px">${D.listening.translation||''}</div></details>`:''}</div>`:'';
+  const listeningHtml=D.listening?`<div class="card stack"><div class="h2">Compréhension orale</div><div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.naturalUrl}">▶ Version naturelle</a></div>${(D.listening.questions||[]).length?'<div class="h2">Questions</div>':''}${(D.listening.questions||[]).map(q=>`<div class="notice"><div class="bigcn" style="font-size:20px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}${(D.listening.script||[]).length?`<details class="notice"><summary><b>Voir la transcription après l’écoute</b></summary><div class="stack" style="margin-top:12px">${D.listening.script.map(x=>`<div><div class="bigcn" style="font-size:20px">${x[0]}</div><div class="pinyin-text">${x[1]}</div></div>`).join('')}</div><div class="small" style="margin-top:12px">${D.listening.translation||''}</div></details>`:''}</div>`:'';
   $('library').innerHTML=`<div class="between"><button id="closeLib" class="btn">← Retour</button><div class="h2">Tout le contenu</div></div><div class="card stack"><div class="h2">🟢 À utiliser</div><div class="grid2">${activeHtml}</div></div><div class="card stack"><div class="h2">🔵 À reconnaître</div><div class="grid2">${recognitionHtml}</div></div>${blocksHtml}<div class="card stack"><div class="h2">Phrases-clés</div>${phrasesHtml}</div><div class="card"><div class="h2">Réseaux</div><div class="grid3">${D.networks.map(n=>`<div class="notice"><b>${n[0]}</b><br><span class="small">${n[1]}</span></div>`).join('')}</div></div>${reflexHtml}${listeningHtml}`;
   if(window.DecoderWordRecorder)DecoderWordRecorder.mount($('library'));
   $('closeLib').onclick=()=>{if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();location.reload();};document.querySelectorAll('.p').forEach(b=>b.onclick=()=>Decoder.say(b.dataset.s));
