@@ -100,7 +100,9 @@ window.DECODER_LESSONS[5] = {
     "",
     []
   ],
-  "audio": {},
+  "audio": {
+    "我家在三楼。": "audio/lesson-05/sentence-01.m4a"
+  },
   "listening": {
     "slowUrl": "https://youtu.be/-PMz2LVRfqk",
     "naturalUrl": "https://youtu.be/-Pu_1k-daSA"

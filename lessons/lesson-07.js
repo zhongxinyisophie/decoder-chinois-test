@@ -95,8 +95,14 @@ window.DECODER_LESSONS[7] = {
     "",
     []
   ],
-  "audio": {},
+  "audio": {
+    "周六还是周日？": "audio/lesson-07/sentence-01.m4a",
+    "三点怎么样？": "audio/lesson-07/sentence-02.m4a",
+    "在哪儿见？": "audio/lesson-07/sentence-03.m4a",
+    "地铁站门口吧。": "audio/lesson-07/sentence-04.m4a"
+  },
   "listening": {
-    "playlistUrl": "https://www.youtube.com/playlist?list=PLPXlnPJE-lcg"
+    "slowUrl": "https://youtu.be/AEcG4NpuQKw",
+    "naturalUrl": "https://youtu.be/4pBnrlCugrA"
   }
 };

@@ -198,7 +198,7 @@
   $('startCard').querySelector('.title').textContent='Les essentiels de cette leçon';
   $('startCard').querySelector('.muted').textContent='Retrouve les mots, les phrases et les écoutes.';
   const notice=document.createElement('div');notice.className='notice small';notice.setAttribute('role','status');
-  notice.textContent='Les mots, les phrases et les écoutes sont disponibles dans « Voir tout le contenu ». Les exercices et la comparaison vocale ouvriront avec les enregistrements.';
+  notice.textContent='Les mots, les phrases et les écoutes sont dans « Voir tout le contenu ». '+(Object.keys(D.audio||{}).length?'Tu peux écouter et comparer les phrases déjà enregistrées. ':'')+'Les autres enregistrements et les exercices seront ajoutés progressivement.';
   $('startCard').append(notice);
  }
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};

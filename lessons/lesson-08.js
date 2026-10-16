@@ -95,7 +95,11 @@ window.DECODER_LESSONS[8] = {
     "",
     []
   ],
-  "audio": {},
+  "audio": {
+    "我有点不舒服。": "audio/lesson-08/sentence-01.m4a",
+    "你发烧吗？": "audio/lesson-08/sentence-02.m4a",
+    "多喝点水。": "audio/lesson-08/sentence-03.m4a"
+  },
   "listening": {
     "slowUrl": "https://youtu.be/98PkSIN23Jk",
     "naturalUrl": "https://youtu.be/MrB66DVPpvU"

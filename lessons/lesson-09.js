@@ -95,7 +95,11 @@ window.DECODER_LESSONS[9] = {
     "",
     []
   ],
-  "audio": {},
+  "audio": {
+    "你收到了吗？": "audio/lesson-09/sentence-01.m4a",
+    "还没收到。": "audio/lesson-09/sentence-02.m4a",
+    "那我再发一次。": "audio/lesson-09/sentence-03.m4a"
+  },
   "listening": {
     "slowUrl": "https://youtu.be/VNh2yWq00B4",
     "naturalUrl": "https://youtu.be/DF8QoWvnaEU"
