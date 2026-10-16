@@ -77,12 +77,12 @@ Decoder.say = function(text, rate=.9){
     const a = new Audio(src);
     Decoder._activeAudio = a;
     a.onended = () => { Decoder._activeAudio = null; };
-    a.onerror = () => Decoder.sayTTS(text, rate);
+    a.onerror = () => {Decoder._activeAudio=null;Decoder.audioNotice('Cet enregistrement ne peut pas être lu. Réessaie plus tard.');};
     const p = a.play();
-    if(p && typeof p.catch === 'function') p.catch(() => Decoder.sayTTS(text, rate));
+    if(p && typeof p.catch === 'function') p.catch(() => {Decoder._activeAudio=null;Decoder.audioNotice('Lecture impossible. Vérifie le volume ou réessaie.');});
     return;
   }
-  Decoder.sayTTS(text, rate);
+  Decoder.audioNotice('Enregistrement à venir. Aucune voix de synthèse n’est utilisée.');
 };
 
 Decoder.getParam = function(name){ return new URLSearchParams(location.search).get(name); };

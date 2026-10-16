@@ -4,7 +4,7 @@
  const recipient=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?email:'';
  $('channelNotice').textContent=recipient?'Tu pourras ouvrir un e-mail ou copier ton retour dans un message.':'Pour le moment, prépare le texte puis copie-le dans ta conversation avec Xinyi.';
  try{const draft=JSON.parse(sessionStorage.getItem(key)||'{}');fields.forEach(id=>{if(typeof draft[id]==='string'){$(id).value=draft[id];if($(id).tagName==='SELECT'&&!$(id).value&&draft[id])$(id).value=draft[id].split(' · ').pop();}});}catch(e){}
- const params=new URLSearchParams(location.search),lesson=params.get('lesson');if(['1','2','3','4','mixed'].includes(lesson))$('tested').value=lesson;
+ const params=new URLSearchParams(location.search),lesson=params.get('lesson');if(['1','2','3','4','5','6','7','8','9','10','mixed'].includes(lesson))$('tested').value=lesson;
  $('feedbackForm').addEventListener('input',()=>{$('delivery').classList.add('hidden');$('change').setCustomValidity('');try{sessionStorage.setItem(key,JSON.stringify(Object.fromEntries(fields.map(id=>[id,$(id).value]))));}catch(e){}});
  $('feedbackForm').onsubmit=e=>{
   e.preventDefault();$('change').setCustomValidity($('change').value.trim()?'':'Écris une suggestion ou « rien ».');if(!$('feedbackForm').reportValidity())return;
