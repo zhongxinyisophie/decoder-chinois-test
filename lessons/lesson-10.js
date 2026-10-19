@@ -93,7 +93,17 @@ window.DECODER_LESSONS[10] = {
   "audio": {
     "你能再说一遍吗？": "audio/lesson-10/sentence-01.m4a",
     "这个是什么意思？": "audio/lesson-10/sentence-02.m4a",
-    "可以写一下吗？": "audio/lesson-10/sentence-03.m4a"
+    "可以写一下吗？": "audio/lesson-10/sentence-03.m4a",
+    "没听懂": "audio/lesson-10/r10-01.m4a",
+    "没听清楚": "audio/lesson-10/r10-02.m4a",
+    "再说一遍": "audio/lesson-10/r10-03.m4a",
+    "慢一点": "audio/lesson-10/r10-04.m4a",
+    "明白了": "audio/lesson-10/r10-05.m4a",
+    "意思": "audio/lesson-10/r10-06.m4a",
+    "写一下": "audio/lesson-10/r10-07.m4a",
+    "不好意思，我没听懂。": "audio/lesson-10/r10-08.m4a",
+    "可以说慢一点吗？": "audio/lesson-10/r10-09.m4a",
+    "你是说下午三点吗？": "audio/lesson-10/r10-10.m4a"
   },
   "listening": {
     "slowUrl": "https://youtu.be/n5EkT1LbPGM",

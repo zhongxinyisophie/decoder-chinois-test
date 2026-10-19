@@ -100,7 +100,23 @@ window.DECODER_LESSONS[6] = {
     "",
     []
   ],
-  "audio": {},
+  "audio": {
+    "坐地铁": "audio/lesson-06/r06-01.m4a",
+    "下车": "audio/lesson-06/r06-02.m4a",
+    "往前走": "audio/lesson-06/r06-03.m4a",
+    "左转": "audio/lesson-06/r06-04.m4a",
+    "还没到": "audio/lesson-06/r06-05.m4a",
+    "快到了": "audio/lesson-06/r06-06.m4a",
+    "已经到了": "audio/lesson-06/r06-07.m4a",
+    "打车": "audio/lesson-06/r06-08.m4a",
+    "出口": "audio/lesson-06/r06-09.m4a",
+    "请问，去这个饭馆怎么走？": "audio/lesson-06/r06-10.m4a",
+    "我在哪一站下车？": "audio/lesson-06/r06-11.m4a",
+    "从哪个出口出来？": "audio/lesson-06/r06-12.m4a",
+    "先往前走，再左转。": "audio/lesson-06/r06-13.m4a",
+    "我还没到，快到了。": "audio/lesson-06/r06-14.m4a",
+    "我已经到了，在门口。": "audio/lesson-06/r06-15.m4a"
+  },
   "listening": {
     "slowUrl": "https://youtu.be/hbgJg_53u8k",
     "naturalUrl": "https://youtu.be/fNdsbgshTbI"

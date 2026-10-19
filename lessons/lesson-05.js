@@ -101,7 +101,21 @@ window.DECODER_LESSONS[5] = {
     []
   ],
   "audio": {
-    "我家在三楼。": "audio/lesson-05/sentence-01.m4a"
+    "我家在三楼。": "audio/lesson-05/sentence-01.m4a",
+    "附近": "audio/lesson-05/r05-01.m4a",
+    "旁边": "audio/lesson-05/r05-02.m4a",
+    "对面": "audio/lesson-05/r05-03.m4a",
+    "楼": "audio/lesson-05/r05-04.m4a",
+    "超市": "audio/lesson-05/r05-05.m4a",
+    "地铁站": "audio/lesson-05/r05-06.m4a",
+    "房间": "audio/lesson-05/r05-07.m4a",
+    "远": "audio/lesson-05/r05-08.m4a",
+    "近": "audio/lesson-05/r05-09.m4a",
+    "你住哪儿？": "audio/lesson-05/r05-10.m4a",
+    "我住在地铁站附近。": "audio/lesson-05/r05-11.m4a",
+    "我住三零二号房。": "audio/lesson-05/r05-12.m4a",
+    "请问，附近有超市吗？": "audio/lesson-05/r05-13.m4a",
+    "离这儿远吗？": "audio/lesson-05/r05-14.m4a"
   },
   "listening": {
     "slowUrl": "https://youtu.be/-PMz2LVRfqk",

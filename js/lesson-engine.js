@@ -198,7 +198,8 @@
   $('startCard').querySelector('.title').textContent='Les essentiels de cette leçon';
   $('startCard').querySelector('.muted').textContent='Retrouve les mots, les phrases et les écoutes.';
   const notice=document.createElement('div');notice.className='notice small';notice.setAttribute('role','status');
-  notice.textContent='Les mots, les phrases et les écoutes sont dans « Voir tout le contenu ». '+(Object.keys(D.audio||{}).length?'Tu peux écouter et comparer les phrases déjà enregistrées. ':'')+'Les autres enregistrements et les exercices seront ajoutés progressivement.';
+  const modelsReady=[...D.active,...D.recognition].map(w=>w[0]).concat(D.sentences).every(t=>D.audio&&D.audio[t]);
+  notice.textContent=modelsReady?'Tous les mots et phrases ont un modèle audio dans « Voir tout le contenu ». Écoute et enregistre-toi pour comparer. Les séances d’exercices ne sont pas encore disponibles.':'Les mots, les phrases et les écoutes sont dans « Voir tout le contenu ». '+(Object.keys(D.audio||{}).length?'Tu peux écouter et comparer les phrases déjà enregistrées. ':'')+'Les autres enregistrements et les exercices seront ajoutés progressivement.';
   $('startCard').append(notice);
  }
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};

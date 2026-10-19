@@ -99,7 +99,17 @@ window.DECODER_LESSONS[7] = {
     "周六还是周日？": "audio/lesson-07/sentence-01.m4a",
     "三点怎么样？": "audio/lesson-07/sentence-02.m4a",
     "在哪儿见？": "audio/lesson-07/sentence-03.m4a",
-    "地铁站门口吧。": "audio/lesson-07/sentence-04.m4a"
+    "地铁站门口吧。": "audio/lesson-07/sentence-04.m4a",
+    "有空": "audio/lesson-07/r07-01.m4a",
+    "有事": "audio/lesson-07/r07-02.m4a",
+    "周六": "audio/lesson-07/r07-03.m4a",
+    "周日": "audio/lesson-07/r07-04.m4a",
+    "见面": "audio/lesson-07/r07-05.m4a",
+    "地铁站门口": "audio/lesson-07/r07-06.m4a",
+    "没空": "audio/lesson-07/r07-07.m4a",
+    "到时候见": "audio/lesson-07/r07-08.m4a",
+    "你周末有空吗？": "audio/lesson-07/r07-09.m4a",
+    "我上午有事，下午可以。": "audio/lesson-07/r07-10.m4a"
   },
   "listening": {
     "slowUrl": "https://youtu.be/AEcG4NpuQKw",

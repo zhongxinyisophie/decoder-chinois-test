@@ -98,7 +98,18 @@ window.DECODER_LESSONS[8] = {
   "audio": {
     "我有点不舒服。": "audio/lesson-08/sentence-01.m4a",
     "你发烧吗？": "audio/lesson-08/sentence-02.m4a",
-    "多喝点水。": "audio/lesson-08/sentence-03.m4a"
+    "多喝点水。": "audio/lesson-08/sentence-03.m4a",
+    "不舒服": "audio/lesson-08/r08-01.m4a",
+    "累": "audio/lesson-08/r08-02.m4a",
+    "头疼": "audio/lesson-08/r08-03.m4a",
+    "发烧": "audio/lesson-08/r08-04.m4a",
+    "冷": "audio/lesson-08/r08-05.m4a",
+    "肚子疼": "audio/lesson-08/r08-06.m4a",
+    "嗓子疼": "audio/lesson-08/r08-07.m4a",
+    "你怎么了？": "audio/lesson-08/r08-08.m4a",
+    "我头疼。": "audio/lesson-08/r08-09.m4a",
+    "你先休息一下吧。": "audio/lesson-08/r08-10.m4a",
+    "休息": "audio/lesson-02/02.m4a"
   },
   "listening": {
     "slowUrl": "https://youtu.be/98PkSIN23Jk",

@@ -98,7 +98,18 @@ window.DECODER_LESSONS[9] = {
   "audio": {
     "你收到了吗？": "audio/lesson-09/sentence-01.m4a",
     "还没收到。": "audio/lesson-09/sentence-02.m4a",
-    "那我再发一次。": "audio/lesson-09/sentence-03.m4a"
+    "那我再发一次。": "audio/lesson-09/sentence-03.m4a",
+    "发消息": "audio/lesson-09/r09-01.m4a",
+    "打电话": "audio/lesson-09/r09-02.m4a",
+    "地址": "audio/lesson-09/r09-03.m4a",
+    "收到": "audio/lesson-09/r09-04.m4a",
+    "再发一次": "audio/lesson-09/r09-05.m4a",
+    "发邮件": "audio/lesson-09/r09-06.m4a",
+    "位置": "audio/lesson-09/r09-07.m4a",
+    "我给你发消息。": "audio/lesson-09/r09-08.m4a",
+    "你能给我发一下地址吗？": "audio/lesson-09/r09-09.m4a",
+    "我刚发了。": "audio/lesson-09/r09-10.m4a",
+    "还没收到": "audio/lesson-09/sentence-02.m4a"
   },
   "listening": {
     "slowUrl": "https://youtu.be/VNh2yWq00B4",
