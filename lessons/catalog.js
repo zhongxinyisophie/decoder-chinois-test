@@ -23,36 +23,36 @@ window.DECODER_CATALOG = {
     "title": "Leçon 5｜住在哪里，附近有什么",
     "fr": "Mon logement et mon quartier",
     "file": "lessons/lesson-05.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-05.js?v=practice-20261019"
   },
   "6": {
     "title": "Leçon 6｜到了吗？",
     "fr": "Tu es arrivé ?",
     "file": "lessons/lesson-06.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-06.js?v=practice-20261019"
   },
   "7": {
     "title": "Leçon 7｜你什么时候有空？",
     "fr": "Tu es libre quand ?",
     "file": "lessons/lesson-07.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-07.js?v=practice-20261019"
   },
   "8": {
     "title": "Leçon 8｜你怎么了？",
     "fr": "Qu’est-ce qu’il y a ?",
     "file": "lessons/lesson-08.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-08.js?v=practice-20261019"
   },
   "9": {
     "title": "Leçon 9｜怎么联系你？",
     "fr": "Comment te joindre ?",
     "file": "lessons/lesson-09.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-09.js?v=practice-20261019"
   },
   "10": {
     "title": "Leçon 10｜你能再说一遍吗？",
     "fr": "Tu peux répéter ?",
     "file": "lessons/lesson-10.js?v=recorded-20261019",
-    "contentOnly": true
+    "exercises": "exercises/lesson-10.js?v=practice-20261019"
   }
 };

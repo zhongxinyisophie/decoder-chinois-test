@@ -94,5 +94,16 @@ Decoder.loadLesson = async function(id){
   if(!meta) throw new Error('Leçon inconnue');
   window.DECODER_LESSONS=window.DECODER_LESSONS||{};
   if(!window.DECODER_LESSONS[id]) await Decoder.loadScript(meta.file);
-  return window.DECODER_LESSONS[id];
+  const lesson=window.DECODER_LESSONS[id];
+  if(meta.exercises && !lesson._exercisesLoaded){
+    window.DECODER_EXERCISES=window.DECODER_EXERCISES||{};
+    if(!window.DECODER_EXERCISES[id]) await Decoder.loadScript(meta.exercises);
+    const bank=window.DECODER_EXERCISES[id];
+    if(!bank) throw new Error('Exercices indisponibles');
+    const {questions,source,...activities}=bank;
+    Object.assign(lesson,activities);
+    lesson.listening={...lesson.listening,questions};
+    lesson._exercisesLoaded=true;
+  }
+  return lesson;
 };
