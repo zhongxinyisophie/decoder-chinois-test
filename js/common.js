@@ -87,7 +87,12 @@ Decoder.say = function(text, rate=.9){
 
 Decoder.getParam = function(name){ return new URLSearchParams(location.search).get(name); };
 Decoder.loadScript = function(src){
-  return new Promise((resolve,reject)=>{const s=document.createElement('script');s.src=src;s.onload=resolve;s.onerror=reject;document.head.appendChild(s);});
+  return new Promise((resolve,reject)=>{
+    const s=document.createElement('script');let settled=false;
+    const finish=error=>{if(settled)return;settled=true;clearTimeout(timer);s.onload=s.onerror=null;if(error){s.remove();reject(error);}else resolve();};
+    const timer=setTimeout(()=>finish(new Error('Délai de chargement dépassé')),15000);
+    s.src=src;s.onload=()=>finish();s.onerror=()=>finish(new Error('Chargement impossible'));document.head.appendChild(s);
+  });
 };
 Decoder.loadLesson = async function(id){
   const meta=window.DECODER_CATALOG && window.DECODER_CATALOG[id];

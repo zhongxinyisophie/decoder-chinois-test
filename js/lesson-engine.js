@@ -2,11 +2,18 @@
  const $=Decoder.$;
  const id=Number(Decoder.getParam('id')||1);
  let D;
- try{D=await Decoder.loadLesson(id);}catch(e){$('title').textContent='Leçon introuvable';$('startCard').classList.add('hidden');return;}
+ try{D=await Decoder.loadLesson(id);if(!window.DecoderFinalRecorder)throw new Error('Enregistreur indisponible');}catch(e){
+  const known=window.DECODER_CATALOG&&window.DECODER_CATALOG[id];
+  $('loadStatus').textContent=known?'Chargement impossible. Vérifie ta connexion, puis réessaie.':'Cette leçon n’existe pas. Reviens à l’accueil.';
+  $('retryLesson').hidden=!known;$('retryLesson').classList.toggle('hidden',!known);return;
+ }
  Decoder.currentLesson=D;
  document.title=D.title+' · Décoder le chinois';
  $('title').textContent=D.title;$('subtitle').textContent=D.fr;
- let i=0,py=0,spoken=0,hanzi=0;
+ let i=0,py=0,spoken=0,hanzi=0,quickTimer=null;
+ function clearQuick(){if(quickTimer!==null)clearInterval(quickTimer);quickTimer=null;}
+ window.addEventListener('pagehide',clearQuick);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden){clearQuick();if($('go')){$('go').disabled=false;$('c').textContent='Prêt ?';}}});
  const checked=new Map();
  function reviewId(){const t=tasks[i];return t.t==='segment'?`segment:${id}`:`${t.t}:${id}:${t.w[0]}`;}
  function storageResult(ok){if(!ok){let note=$('lessonStorageNotice');if(!note){note=document.createElement('div');note.id='lessonStorageNotice';note.className='notice small';note.setAttribute('role','status');$('session').prepend(note);}note.textContent='L’historique ne peut pas être sauvegardé ; tu peux continuer.';}}
@@ -24,7 +31,7 @@
   {t:'final'}
  ];
  if(D.listening) tasks.splice(5,0,{t:'fullListening'});
- function next(){const r=checked.get(i);if(r&&r.solved)storageResult(DecoderReview.finish(reviewId(),r.first?0:r.attempts-1));Decoder.stopAudio();i++;if(i>=tasks.length)done();else render()}
+ function next(){clearQuick();const r=checked.get(i);if(r&&r.solved)storageResult(DecoderReview.finish(reviewId(),r.first?0:r.attempts-1));Decoder.stopAudio();i++;if(i>=tasks.length)done();else render()}
  function render(){
   $('count').textContent=(i+1)+' / '+tasks.length;$('bar').style.width=((i+1)/tasks.length*100)+'%';
   const t=tasks[i];
@@ -65,7 +72,7 @@
  }
  function quick(q){
   $('host').innerHTML=`<div class="card stack"><div><div class="task-kicker">Réponse rapide</div><div class="task-title">Réponds sans écrire.</div><div class="task-help">3 secondes, puis parle.</div></div><div class="notice center"><div class="bigcn">${q[0]}</div><div id="c" class="h2">Prêt ?</div><button id="go" class="btn primary">Démarrer</button></div><div id="say" class="hidden success"><b>Parle maintenant.</b></div><button id="hintBtn" class="btn link">Je bloque → indice</button><div id="hint" class="hidden notice">${q[1]}</div><button id="n" class="btn primary">J’ai répondu · Continuer</button></div>`;
-  $('go').onclick=()=>{$('go').disabled=true;let x=3;$('c').textContent=x;const t=setInterval(()=>{x--;if(x>0)$('c').textContent=x;else{clearInterval(t);$('c').textContent='Maintenant !';$('say').classList.remove('hidden');spoken++;}},1000);};
+  $('go').onclick=()=>{clearQuick();$('go').disabled=true;let x=3;$('c').textContent=x;const step=i;quickTimer=setInterval(()=>{if(i!==step||!$('c')||!$('say')){clearQuick();return;}x--;if(x>0)$('c').textContent=x;else{clearQuick();$('c').textContent='Maintenant !';$('say').classList.remove('hidden');spoken++;}},1000);};
   $('hintBtn').onclick=()=>$('hint').classList.toggle('hidden');$('n').onclick=next;
  }
  function fullListening(){
@@ -79,106 +86,17 @@
   setupRec();$('n').onclick=done;
  }
  function setupRec(){
-  const h=$('rec');
-  if(!navigator.mediaDevices||!window.MediaRecorder){
-   h.innerHTML='<div class="notice small">Micro indisponible ici. Tu peux quand même dire ta réponse à voix haute.</div>';
-   return;
-  }
-
-  const chooseMime=()=>{
-   const candidates=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'];
-   return candidates.find(t=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(t))||'';
-  };
-  const fileInfo=(mime)=>{
-   if((mime||'').includes('mp4'))return {ext:'m4a',type:'audio/mp4'};
-   if((mime||'').includes('ogg'))return {ext:'ogg',type:mime||'audio/ogg'};
-   return {ext:'webm',type:mime||'audio/webm'};
-  };
-
-  const idle=()=>{
-   h.innerHTML='<button id="sr" class="btn recording-main">🎙 Enregistrer ma réponse</button><div class="small recording-help">Tu pourras l’écouter, la refaire puis la partager avec Xinyi.</div>';
-   $('sr').onclick=start;
-  };
-
-  async function start(){
-   $('n').disabled=true;
-   try{
-    const stream=await navigator.mediaDevices.getUserMedia({audio:true});
-    const chunks=[];
-    const preferred=chooseMime();
-    const mr=preferred?new MediaRecorder(stream,{mimeType:preferred}):new MediaRecorder(stream);
-    let seconds=0;
-    const actualMime=mr.mimeType||preferred||'audio/webm';
-
-    mr.ondataavailable=e=>{if(e.data&&e.data.size)chunks.push(e.data);};
-    mr.onstop=()=>{
-     const info=fileInfo(actualMime);
-     const blob=new Blob(chunks,{type:actualMime});
-     const url=URL.createObjectURL(blob);
-     stream.getTracks().forEach(x=>x.stop());
-     $('n').disabled=false;spoken++;
-     showReview(blob,url,info);
-    };
-
-    mr.start();
-    h.innerHTML=`<div class="recording-live"><div class="recording-dot"></div><div><b>Enregistrement en cours</b><div class="small" id="timer">0:00</div></div></div><button id="stop" class="btn soft recording-stop">■ Arrêter</button>`;
-    const timer=setInterval(()=>{seconds++;const m=Math.floor(seconds/60),s=String(seconds%60).padStart(2,'0');if($('timer'))$('timer').textContent=m+':'+s;},1000);
-    $('stop').onclick=()=>{clearInterval(timer);mr.stop();};
-   }catch(e){
-    $('n').disabled=false;
-    h.innerHTML='<div class="notice small">Autorisation micro refusée ou indisponible. Vérifie l’autorisation du micro dans ton navigateur, puis réessaie.</div><button id="retryRec" class="btn">Réessayer</button>';
-    $('retryRec').onclick=idle;
-   }
-  }
-
-  function showReview(blob,url,info){
-   const stamp=new Date().toISOString().slice(0,10);
-   const safeLesson=String(D.id||id).padStart(2,'0');
-   const filename=`decoder-chinois-L${safeLesson}-${stamp}.${info.ext}`;
-   const file=new File([blob],filename,{type:info.type,lastModified:Date.now()});
-
-   h.innerHTML=`<div class="recording-review stack"><div><div class="task-kicker">Avant d’envoyer</div><div class="task-title recording-title">Écoute ta réponse.</div><div class="task-help">Si tu veux la corriger, réenregistre-la. Sinon, partage-la avec Xinyi.</div></div><audio id="myAudio" controls src="${url}"></audio><div class="recording-actions"><button id="redoRec" class="btn">↻ Réenregistrer</button><button id="shareRec" class="btn primary">Partager le fichier audio</button></div><div id="shareNote" class="small recording-help">Choisis ton application puis Xinyi comme destinataire. Si le partage est indisponible, télécharge le fichier et joins-le à ton message.</div><a id="downloadRec" class="btn link recording-download" href="${url}" download="${filename}">Télécharger l’enregistrement</a></div>`;
-
-   $('redoRec').onclick=()=>{URL.revokeObjectURL(url);idle();};
-   const fallback=()=>{
-    const note=$('shareNote');
-    note.textContent='Pour envoyer ta réponse : 1. Télécharge le fichier audio ci-dessous. 2. Ouvre ta conversation avec Xinyi. 3. Ajoute ce fichier en pièce jointe. Ton enregistrement reste disponible ici.';
-    $('downloadRec').className='btn primary recording-download';
-    $('downloadRec').focus();
-   };
-   let canShareFile=false;
-   try{canShareFile=!!(navigator.share&&navigator.canShare&&navigator.canShare({files:[file]}));}catch(e){}
-   if(!canShareFile){
-    $('shareRec').hidden=true;
-    fallback();
-   }
-   $('shareRec').onclick=async()=>{
-    const button=$('shareRec');
-    if(button.disabled)return;
-    button.disabled=true;
-    try{
-     await navigator.share({files:[file]});
-     $('shareNote').textContent='Menu de partage fermé. Vérifie dans ton application que le fichier a bien été envoyé à Xinyi.';
-    }catch(err){
-     if(err&&err.name==='AbortError'){
-      $('shareNote').textContent='Partage annulé. Tu peux réessayer ou télécharger ton enregistrement.';
-     }else{
-      button.hidden=true;
-      fallback();
-     }
-    }finally{button.disabled=false;}
-   };
-  }
-
-  idle();
+  DecoderFinalRecorder.mount($('rec'),{lesson:id,onRecorded:()=>spoken++,busy:value=>{if($('n'))$('n').disabled=value;}});
  }
  function done(){
+  clearQuick();DecoderFinalRecorder.cleanup();Decoder.stopAudio();
   $('bar').style.width='100%';$('count').textContent='Terminé';
   const answers=[...checked.values()],first=answers.filter(r=>r.first),retried=answers.filter(r=>r.attempts>1);
   $('host').innerHTML=`<div class="card stack"><div class="title">Ta séance est terminée.</div><div class="success">Réussis au premier essai : <b>${first.length} / ${answers.length}</b><p>${first.map(r=>r.text).join(' · ')||'Aucun premier essai réussi cette fois.'}</p></div>${retried.length?`<div class="notice"><b>À reprendre</b><p>${retried.map(r=>r.text).join(' · ')}</p></div>`:''}<div class="small">Seules les réponses aux choix et à la remise en ordre sont évaluées. L’oral n’est pas noté automatiquement.</div><div class="grid2"><a class="btn" href="review.html">À revoir</a><button id="doneFocus" class="btn primary">Pratiquer à voix haute</button><a class="btn" href="index.html">Accueil</a><a class="btn" href="feedback.html?lesson=${id}">Donner mon avis</a></div></div>`;
   $('doneFocus').onclick=()=>DecoderFocus.start(D,id);
  }
  function library(){
+  clearQuick();DecoderFinalRecorder.cleanup();
   if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();
   $('library').classList.remove('hidden');$('session').classList.add('hidden');$('startCard').classList.add('hidden');
   const wordAudio=(text,model=false)=>D.audio&&D.audio[text]?`<button class="btn soft p" data-s="${text}" aria-label="${model?'Écouter le modèle':'Écouter'} : ${text}">▶ ${model?'Écouter le modèle':'Écouter'}</button>`:'<div class="small">Enregistrement à venir</div>';
@@ -193,6 +111,8 @@
   if(window.DecoderWordRecorder&&$('library').querySelector('[data-student-recording]'))DecoderWordRecorder.mount($('library'));
   $('closeLib').onclick=()=>{if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();location.reload();};document.querySelectorAll('.p').forEach(b=>b.onclick=()=>Decoder.say(b.dataset.s));
  }
+ $('loadPanel').hidden=true;$('libraryBtn').disabled=false;
+ $('start').disabled=D.practiceReady===false;$('focusBtn').disabled=D.practiceReady===false;
  if(D.practiceReady===false){
   $('start').disabled=true;$('focusBtn').disabled=true;
   $('startCard').querySelector('.title').textContent='Les essentiels de cette leçon';
