@@ -443,3 +443,12 @@ tests/feedback.test.cjs通过，新增断言标题获得焦点、发送区域滚
 
 
 教师于2026-10-26授权发布已验收修复及独立反馈发送页。本次排除.local.html夹具、私人试听输出及原始录音。部署结果另记。
+
+
+## 可靠性修复与独立反馈发送页已发布（2026-10-26）
+
+教师明确授权发布。功能提交a42aac1c8124dd296d9587d474981a5671f81f3d，GitHub Pages运行40401977725完成success。此次只更新课程加载/计时/最终录音、反馈表单/独立发送页及相关自动测试文档，未接通外部表单服务，未发布.local.html夹具或私人输出。
+
+发布前tests/reliability.test.cjs及tests/feedback.test.cjs复核通过。线上375×667：确认加载期间三个入口禁用；反馈表单跳转feedback-send.html，全文折叠，邮件按钮底部288px（视口667px），无横向溢出；返回修改保留第五课与输入文本，重提和刷新可用。第五课完成9活动导航和结算，快速口答倒计时启动后跨题及最终录音入口检查通过；首页、混合、À revoir页面显示检查，无上述测试相关控制台错误。模型播放按钮点击无报错。真实手机麦克风、锁屏/后台恢复、系统分享/下载及实际邮箱收件尚待教师实测；本轮未发送邮件。
+
+手机正式测试入口：https://zhongxinyisophie.github.io/decoder-chinois-test/feedback.html?lesson=5&v=release-20261026 及 https://zhongxinyisophie.github.io/decoder-chinois-test/lesson.html?id=5&v=release-20261026 。旧本地未发布章节为历史记录，本节为当前状态。
