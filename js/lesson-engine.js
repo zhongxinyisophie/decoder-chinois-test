@@ -2,7 +2,7 @@
  const $=Decoder.$;
  const id=Number(Decoder.getParam('id')||1);
  let D;
- try{D=await Decoder.loadLesson(id);if(!window.DecoderFinalRecorder)throw new Error('Enregistreur indisponible');}catch(e){
+ try{D=await Decoder.loadLesson(id);if(!window.DecoderFinalRecorder||!window.DecoderLibraryNavigation)throw new Error('Enregistreur indisponible');}catch(e){
   const known=window.DECODER_CATALOG&&window.DECODER_CATALOG[id];
   $('loadStatus').textContent=known?'Chargement impossible. Vérifie ta connexion, puis réessaie.':'Cette leçon n’existe pas. Reviens à l’accueil.';
   $('retryLesson').hidden=!known;$('retryLesson').classList.toggle('hidden',!known);return;
@@ -107,9 +107,22 @@
   const blocksHtml=D.blocks&&D.blocks.length?`<div class="card stack"><div class="h2">Construis ta phrase</div>${D.blocks.map(b=>`<div class="notice"><div class="small"><b>${b[0]}</b></div><div>${b[1]}</div><div class="bigcn" style="font-size:21px">${b[2]}</div><div class="pinyin-text">${b[3]}</div><div class="small">${b[4]}</div></div>`).join('')}</div>`:'';
   const reflexHtml=D.reflex&&D.reflex.length?`<div class="card stack"><div class="h2">🇫🇷 Réflexe francophone</div>${D.reflex.map(r=>`<div class="notice"><b>${r[0]}</b><div class="small">${r[1]}</div><div class="bigcn" style="font-size:20px;margin-top:6px">${r[2]}</div><div class="small" style="margin-top:6px">${r[3]}</div></div>`).join('')}</div>`:'';
   const listeningHtml=D.listening?`<div class="card stack"><div class="h2">Compréhension orale</div>${D.listening.playlistUrl?`<a class="btn soft" target="_blank" rel="noopener" href="${D.listening.playlistUrl}">Ouvrir les écoutes sur YouTube</a><div class="small">Choisis la leçon 7 dans la liste. Les liens directs des deux versions seront ajoutés après vérification.</div>`:`<div class="grid2"><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.slowUrl}">▶ Version lente</a><a class="btn soft" target="_blank" rel="noopener" href="${D.listening.naturalUrl}">▶ Version naturelle</a></div>`}${(D.listening.questions||[]).length?'<div class="h2">Questions</div>':''}${(D.listening.questions||[]).map(q=>`<div class="notice"><div class="bigcn" style="font-size:20px">${q[0]}</div><div class="pinyin-text">${q[1]}</div><div class="small">${q[2]}</div></div>`).join('')}${(D.listening.script||[]).length?`<details class="notice"><summary><b>Voir la transcription après l’écoute</b></summary><div class="stack" style="margin-top:12px">${D.listening.script.map(x=>`<div><div class="bigcn" style="font-size:20px">${x[0]}</div><div class="pinyin-text">${x[1]}</div></div>`).join('')}</div><div class="small" style="margin-top:12px">${D.listening.translation||''}</div></details>`:''}</div>`:'';
-  $('library').innerHTML=`<div class="between"><button id="closeLib" class="btn">← Retour</button><div class="h2">Tout le contenu</div></div><div class="card stack"><div class="h2">🟢 À utiliser</div><div class="grid2">${activeHtml}</div></div><div class="card stack"><div class="h2">🔵 À reconnaître</div><div class="grid2">${recognitionHtml}</div></div>${blocksHtml}<div class="card stack"><div class="h2">Phrases-clés</div>${phrasesHtml}</div>${D.networks.length?`<div class="card"><div class="h2">Réseaux</div><div class="grid3">${D.networks.map(n=>`<div class="notice"><b>${n[0]}</b><br><span class="small">${n[1]}</span></div>`).join('')}</div></div>`:""}${reflexHtml}${listeningHtml}`;
-  if(window.DecoderWordRecorder&&$('library').querySelector('[data-student-recording]'))DecoderWordRecorder.mount($('library'));
-  $('closeLib').onclick=()=>{if(window.DecoderWordRecorder)DecoderWordRecorder.cleanup();location.reload();};document.querySelectorAll('.p').forEach(b=>b.onclick=()=>Decoder.say(b.dataset.s));
+  const counted=(n,one,many)=>n+' '+(n===1?one:many);
+  const sections=[
+   {title:'À utiliser',count:D.active.length,detail:counted(D.active.length,'mot ou expression à utiliser','mots et expressions à utiliser'),html:`<div class="card stack"><div class="h2">🟢 À utiliser</div><div class="grid2">${activeHtml}</div></div>`},
+   {title:'À reconnaître',count:D.recognition.length,detail:counted(D.recognition.length,'mot ou expression à reconnaître','mots et expressions à reconnaître'),html:`<div class="card stack"><div class="h2">🔵 À reconnaître</div><div class="grid2">${recognitionHtml}</div></div>`},
+   {title:'Construis ta phrase',count:(D.blocks||[]).length,detail:counted((D.blocks||[]).length,'modèle de construction','modèles de construction'),html:blocksHtml},
+   {title:'Phrases-clés',count:phraseData.length,detail:counted(phraseData.length,'phrase à écouter et pratiquer','phrases à écouter et pratiquer'),html:`<div class="card stack"><div class="h2">Phrases-clés</div>${phrasesHtml}</div>`},
+   {title:'Réseaux',count:(D.networks||[]).length,detail:counted((D.networks||[]).length,'groupe de mots liés','groupes de mots liés'),html:D.networks.length?`<div class="card stack"><div class="h2">Réseaux</div><div class="grid3">${D.networks.map(n=>`<div class="notice"><b>${n[0]}</b><br><span class="small">${n[1]}</span></div>`).join('')}</div></div>`:''},
+   {title:'Réflexe francophone',count:(D.reflex||[]).length,detail:counted((D.reflex||[]).length,'repère pour les francophones','repères pour les francophones'),html:reflexHtml},
+   {title:'Compréhension orale',count:D.listening?1:0,detail:'Écoutes et questions de compréhension',html:listeningHtml}
+  ];
+  const wordBox=window.DecoderWordBoxLibrarySection&&DecoderWordBoxLibrarySection(id);
+  if(wordBox)sections.splice(sections.findIndex(section=>section.title==='Phrases-clés')+1,0,wordBox);
+  DecoderLibraryNavigation.mount({root:$('library'),sections,
+   onExit:()=>{$('library').classList.add('hidden');$('startCard').classList.remove('hidden');$('libraryBtn').focus({preventScroll:true});$('startCard').scrollIntoView({block:'start',behavior:'auto'});},
+   onSection:panel=>{if(window.DecoderWordRecorder&&panel.querySelector('[data-student-recording]'))DecoderWordRecorder.mount(panel);panel.querySelectorAll('.p').forEach(button=>button.onclick=()=>Decoder.say(button.dataset.s));}
+  });
  }
  $('loadPanel').hidden=true;$('libraryBtn').disabled=false;
  $('start').disabled=D.practiceReady===false;$('focusBtn').disabled=D.practiceReady===false;
@@ -125,6 +138,7 @@
  $('start').onclick=()=>{$('session').classList.remove('hidden');$('startCard').classList.add('hidden');render();};
  $('libraryBtn').onclick=library;
  $('focusBtn').onclick=()=>DecoderFocus.start(D,id);
- if(D.practiceReady!==false&&Decoder.getParam('mode')==='focus')DecoderFocus.start(D,id);
+ if(Decoder.getParam('view')==='library')library();
+ else if(D.practiceReady!==false&&Decoder.getParam('mode')==='focus')DecoderFocus.start(D,id);
 })();
 

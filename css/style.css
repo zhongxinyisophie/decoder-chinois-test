@@ -199,3 +199,5 @@ textarea{min-height:95px}
  .task-answered .pronunciation-check .instruction{display:none}
  .task-answered .pinyin-section{padding-top:6px;margin-top:0;gap:6px}
 }
+/* Library directory: preserve the shared card design with semantic buttons. */
+.library-entry{gap:6px;padding:14px;font:inherit;color:var(--text);text-align:left;cursor:pointer;width:100%;min-width:0;align-content:start}.library-entry:hover{border-color:#a5b4fc;background:#fafbff}#library>p{margin:0}#library h2{margin:0}#librarySection{min-width:0}
