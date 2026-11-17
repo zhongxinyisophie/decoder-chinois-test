@@ -452,3 +452,14 @@ tests/feedback.test.cjs通过，新增断言标题获得焦点、发送区域滚
 发布前tests/reliability.test.cjs及tests/feedback.test.cjs复核通过。线上375×667：确认加载期间三个入口禁用；反馈表单跳转feedback-send.html，全文折叠，邮件按钮底部288px（视口667px），无横向溢出；返回修改保留第五课与输入文本，重提和刷新可用。第五课完成9活动导航和结算，快速口答倒计时启动后跨题及最终录音入口检查通过；首页、混合、À revoir页面显示检查，无上述测试相关控制台错误。模型播放按钮点击无报错。真实手机麦克风、锁屏/后台恢复、系统分享/下载及实际邮箱收件尚待教师实测；本轮未发送邮件。
 
 手机正式测试入口：https://zhongxinyisophie.github.io/decoder-chinois-test/feedback.html?lesson=5&v=release-20261026 及 https://zhongxinyisophie.github.io/decoder-chinois-test/lesson.html?id=5&v=release-20261026 。旧本地未发布章节为历史记录，本节为当前状态。
+
+
+## 目录与第六课选学练习已发布（2026-11-17）
+
+教师确认按建议发布。功能提交708567b8f9d42e3921c5406d464f1496ce79109a，Pages运行44061572577完成success。本次仅发布内容库目录导航、第六课La boîte à mots入口与正式word-box.html、独立词库及样式和相关测试；未上传.local.html试听页、私人输出、未验收草稿或新音频，原课程教学内容保持不变。
+
+选学流程为4道搭配、4道听音配图和1次口头应用，共9活动。听力目标坐地铁、打车、往前走、左转复用第六课完整真人录音，均用完整动作表达作干扰项，随机A/B；两个选项完整播放后才能选择。搭配和听力分别结算，口语不自动评分；此选学练习的成绩尚未保存到学习历史。坐火车、坐汽车、骑自行车仍标待补录，未作为听力目标。
+
+发布前word-box、library-navigation、reliability、feedback四组自动测试全部通过。线上375×667检查十课目录，无横向溢出，第六课选学入口及返回目录正常；完成9活动并完整播放8次听力选项，故意错2道后听力2/4、搭配4/4，待练列表对应打车及左转，控制台无错误。首页、混合复习加载并开始、反馈表单显示已核对。实体手机、真实麦克风录制/分享及实际邮箱收件本轮未重复验证。
+
+手机入口：https://zhongxinyisophie.github.io/decoder-chinois-test/lesson.html?id=6&view=library&v=release-20261117 ，选择La boîte à mots后Jouer avec les mots；直接练习：https://zhongxinyisophie.github.io/decoder-chinois-test/word-box.html 。本节替代此前相关“本地未发布”的当前状态描述，保留历史测试记录。
